@@ -14,6 +14,9 @@ func Test_Titleize(t *testing.T) {
 		{"*hello*", "*hello*"},
 		{"i've read a book! have you?", "I've Read A Book! Have You?"},
 		{"This is `code` ok", "This Is `code` OK"},
+		{"foo_bar", "Foo Bar"},
+		{"admin/widget", "Admin Widget"},
+		{"widget", "Widget"},
 	}
 
 	for _, tt := range table {
