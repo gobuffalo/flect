@@ -75,3 +75,10 @@ func xappend(a []string, ss ...string) []string {
 	}
 	return a
 }
+
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
