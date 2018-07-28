@@ -5,14 +5,6 @@ import (
 	"unicode"
 )
 
-func isVowel(r rune) bool {
-	switch r {
-	case 'a', 'e', 'i', 'o', 'u':
-		return true
-	}
-	return false
-}
-
 var spaces = []rune{'_', ' ', ':', '-', '/'}
 
 func isSpace(c rune) bool {
