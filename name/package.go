@@ -15,6 +15,10 @@ func Package(s string) string {
 	return New(s).Package().String()
 }
 
+// Package will attempt to return a package version of the name
+//	$GOPATH/src/foo/bar = foo/bar
+//	$GOPATH\src\foo\bar = foo/bar
+//	foo/bar = foo/bar
 func (i Ident) Package() Ident {
 	gp := goPath()
 	s := i.Original

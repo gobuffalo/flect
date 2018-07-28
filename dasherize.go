@@ -13,6 +13,10 @@ func Dasherize(s string) string {
 	return New(s).Dasherize().String()
 }
 
+// Dasherize returns an alphanumeric, lowercased, dashed string
+//	Donald E. Knuth = donald-e-knuth
+//	Test with + sign = test-with-sign
+//	admin/WidgetID = admin-widget-id
 func (i Ident) Dasherize() Ident {
 	var parts []string
 
