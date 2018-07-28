@@ -1,8 +1,36 @@
 package flect
 
+import (
+	"bytes"
+	"encoding/json"
+	"testing"
+
+	"github.com/stretchr/testify/require"
+)
+
 type tt struct {
 	act string
 	exp string
+}
+
+func Test_LoadReader(t *testing.T) {
+	r := require.New(t)
+	// in := `{"beatle": "the beatles", "xyz": "zyx"}`
+	m := map[string]string{
+		"beatle": "the beatles",
+		"xyz":    "zyx",
+	}
+
+	b, err := json.Marshal(m)
+	r.NoError(err)
+
+	r.NoError(LoadReader(bytes.NewReader(b)))
+	for k, v := range m {
+		r.Equal(v, Pluralize(k))
+		r.Equal(v, Pluralize(v))
+		r.Equal(k, Singularize(k))
+		r.Equal(k, Singularize(v))
+	}
 }
 
 var singlePluralAssertions = []tt{
