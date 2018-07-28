@@ -1,4 +1,4 @@
-package flect
+package name
 
 import (
 	"testing"

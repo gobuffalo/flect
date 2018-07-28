@@ -5,13 +5,21 @@ import (
 	"unicode"
 )
 
+// Underscore a string
+//	bob dylan = bob_dylan
+//	Nice to see you! = nice_to_see_you
+//	widgetID = widget_id
 func Underscore(s string) string {
 	return New(s).Underscore()
 }
 
+// Underscore a string
+//	bob dylan = bob_dylan
+//	Nice to see you! = nice_to_see_you
+//	widgetID = widget_id
 func (i Ident) Underscore() string {
 	var out []string
-	for _, part := range i.parts {
+	for _, part := range i.Parts {
 		var x string
 		for _, c := range part {
 			if unicode.IsLetter(c) || unicode.IsDigit(c) {

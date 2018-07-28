@@ -1,4 +1,4 @@
-package flect
+package name
 
 import (
 	"testing"
@@ -10,8 +10,10 @@ func Test_ParamID(t *testing.T) {
 	table := []tt{
 		{"foo_bar", "foo_bar_id"},
 		{"admin/widget", "admin_widget_id"},
+		{"admin/widgets", "admin_widgets_id"},
 		{"widget", "widget_id"},
 		{"User", "user_id"},
+		{"UserID", "user_id"},
 	}
 
 	for _, tt := range table {

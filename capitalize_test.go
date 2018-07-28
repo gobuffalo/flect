@@ -10,8 +10,9 @@ func Test_Capitalize(t *testing.T) {
 	table := []tt{
 		{"", ""},
 		{"foo", "Foo"},
+		{"bob dylan", "Bob dylan"},
 		{"WidgetID", "WidgetID"},
-		{"widgetID", "WidgetID"},
+		{"widget_id", "Widget_id"},
 		{"widget_ID", "Widget_ID"},
 		{"widget ID", "Widget ID"},
 	}

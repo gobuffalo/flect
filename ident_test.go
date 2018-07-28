@@ -42,11 +42,11 @@ func Test_New(t *testing.T) {
 	}
 
 	for _, tt := range table {
-		t.Run(tt.original, func(st *testing.T) {
+		t.Run(tt.Original, func(st *testing.T) {
 			r := require.New(st)
-			i := New(tt.original)
-			r.Equal(tt.original, i.original)
-			r.Equal(tt.parts, i.parts)
+			i := New(tt.Original)
+			r.Equal(tt.Original, i.Original)
+			r.Equal(tt.Parts, i.Parts)
 		})
 	}
 }

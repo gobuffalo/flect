@@ -1,10 +1,15 @@
-package flect
+package name
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
 )
+
+type tt struct {
+	act string
+	exp string
+}
 
 func Test_Name(t *testing.T) {
 	table := []tt{
@@ -34,13 +39,13 @@ func Test_Name(t *testing.T) {
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
 			r := require.New(st)
-			r.Equal(tt.exp, Name(tt.act))
-			r.Equal(tt.exp, Name(tt.exp))
+			r.Equal(tt.exp, Proper(tt.act))
+			r.Equal(tt.exp, Proper(tt.exp))
 		})
 	}
 }
 
-func Test_GroupName(t *testing.T) {
+func Test_Group(t *testing.T) {
 	table := []tt{
 		{"", ""},
 		{"Person", "People"},
@@ -59,8 +64,8 @@ func Test_GroupName(t *testing.T) {
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
 			r := require.New(st)
-			r.Equal(tt.exp, GroupName(tt.act))
-			r.Equal(tt.exp, GroupName(tt.exp))
+			r.Equal(tt.exp, Group(tt.act))
+			r.Equal(tt.exp, Group(tt.exp))
 		})
 	}
 }

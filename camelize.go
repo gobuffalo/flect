@@ -5,13 +5,21 @@ import (
 	"unicode"
 )
 
+// Camelize returns a camelize version of a string
+//	bob dylan = bobDylan
+//	widget_id = widgetID
+//	WidgetID = widgetID
 func Camelize(s string) string {
 	return New(s).Camelize()
 }
 
+// Camelize returns a camelize version of a string
+//	bob dylan = bobDylan
+//	widget_id = widgetID
+//	WidgetID = widgetID
 func (i Ident) Camelize() string {
 	var out []string
-	for i, part := range i.parts {
+	for i, part := range i.Parts {
 		var x string
 		var capped bool
 		for _, c := range part {

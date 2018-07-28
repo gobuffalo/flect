@@ -7,19 +7,22 @@ import (
 	"unicode/utf8"
 )
 
+// Ident represents the string and it's parts
 type Ident struct {
-	original string
-	parts    []string
+	Original string
+	Parts    []string
 }
 
+// String implements fmt.Stringer and returns the original string
 func (i Ident) String() string {
-	return i.original
+	return i.Original
 }
 
+// New creates a new Ident from the string
 func New(s string) Ident {
 	i := Ident{
-		original: s,
-		parts:    toParts(s),
+		Original: s,
+		Parts:    toParts(s),
 	}
 
 	return i
