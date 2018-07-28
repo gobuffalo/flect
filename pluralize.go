@@ -1,120 +1,162 @@
 package flect
 
-// source for grammar rules: https://www.grammarly.com/blog/plural-nouns/
 import (
 	"strings"
+	"sync"
 )
+
+var pluralMoot = &sync.RWMutex{}
 
 func Pluralize(s string) string {
 	return New(s).Pluralize()
 }
 
 func (i Ident) Pluralize() string {
-	if len(i.parts) == 0 {
+	s := i.original
+	if len(s) == 0 {
 		return ""
 	}
-	li := len(i.parts) - 1
-	last := i.parts[li]
-	if _, ok := pluralToSingle[strings.ToLower(last)]; ok {
-		return i.original
-	}
-	parts := i.parts[:li]
-	if p, ok := singleToPlural[strings.ToLower(last)]; ok {
-		parts = append(parts, p)
-		return strings.Join(parts, " ")
-	}
 
+	pluralMoot.RLock()
+	defer pluralMoot.RUnlock()
+
+	ls := strings.ToLower(s)
+	if _, ok := pluralToSingle[ls]; ok {
+		return s
+	}
+	if p, ok := singleToPlural[ls]; ok {
+		return p
+	}
 	for _, r := range pluralRules {
-		if strings.HasSuffix(last, r.suffix) {
-			parts = append(parts, r.fn(last))
-			return strings.Join(parts, " ")
+		if strings.HasSuffix(ls, r.suffix) {
+			return r.fn(s)
 		}
 	}
 
-	//To make regular nouns plural, add ‑s to the end.
-	if !strings.HasSuffix(last, "s") {
-		last += "s"
+	if strings.HasSuffix(ls, "s") {
+		return s
 	}
-	parts = append(parts, last)
-	return strings.Join(parts, " ")
+
+	return s + "s"
 }
 
-//  If the singular noun ends in ‑s, -ss, -sh, -ch, -x, or -z, add ‑es to the end to make it plural.
-func esPlural(s string) string {
-	return s + "es"
+var pluralRules = []rule{}
+
+func init() {
+	AddPlural("man", "men")
+	AddPlural("tz", "tzes")
+	AddPlural("alias", "aliases")
+	AddPlural("oasis", "oasis")
+	AddPlural("wife", "wives")
+	AddPlural("basis", "basis")
+	AddPlural("atum", "ata")
+	AddPlural("adium", "adia")
+	AddPlural("actus", "acti")
+	AddPlural("irus", "iri")
+	AddPlural("iterion", "iteria")
+	AddPlural("dium", "diums")
+	AddPlural("ovum", "ova")
+	AddPlural("ize", "izes")
+	AddPlural("dge", "dges")
+	AddPlural("focus", "foci")
+	AddPlural("child", "children")
+	AddPlural("oaf", "oaves")
+	AddPlural("randum", "randa")
+	AddPlural("base", "bases")
+	AddPlural("atus", "atuses")
+	AddPlural("ode", "odes")
+	AddPlural("person", "people")
+	AddPlural("va", "vae")
+	AddPlural("leus", "li")
+	AddPlural("ld", "ldren")
+	AddPlural("oot", "eet")
+	AddPlural("oose", "eese")
+	AddPlural("box", "boxes")
+	AddPlural("ium", "ia")
+	AddPlural("sis", "ses")
+	AddPlural("nna", "nnas")
+	AddPlural("eses", "esis")
+	AddPlural("stis", "stes")
+	AddPlural("ex", "ices")
+	AddPlural("ula", "ulae")
+	AddPlural("isis", "ises")
+	AddPlural("ouses", "ouse")
+	AddPlural("olves", "olf")
+	AddPlural("lf", "lves")
+	AddPlural("rf", "rves")
+	AddPlural("afe", "aves")
+	AddPlural("bfe", "bves")
+	AddPlural("cfe", "cves")
+	AddPlural("dfe", "dves")
+	AddPlural("efe", "eves")
+	AddPlural("gfe", "gves")
+	AddPlural("hfe", "hves")
+	AddPlural("ife", "ives")
+	AddPlural("jfe", "jves")
+	AddPlural("kfe", "kves")
+	AddPlural("lfe", "lves")
+	AddPlural("mfe", "mves")
+	AddPlural("nfe", "nves")
+	AddPlural("ofe", "oves")
+	AddPlural("pfe", "pves")
+	AddPlural("qfe", "qves")
+	AddPlural("rfe", "rves")
+	AddPlural("sfe", "sves")
+	AddPlural("tfe", "tves")
+	AddPlural("ufe", "uves")
+	AddPlural("vfe", "vves")
+	AddPlural("wfe", "wves")
+	AddPlural("xfe", "xves")
+	AddPlural("yfe", "yves")
+	AddPlural("zfe", "zves")
+	AddPlural("hive", "hives")
+	AddPlural("quy", "quies")
+	AddPlural("by", "bies")
+	AddPlural("cy", "cies")
+	AddPlural("dy", "dies")
+	AddPlural("fy", "fies")
+	AddPlural("gy", "gies")
+	AddPlural("hy", "hies")
+	AddPlural("jy", "jies")
+	AddPlural("ky", "kies")
+	AddPlural("ly", "lies")
+	AddPlural("my", "mies")
+	AddPlural("ny", "nies")
+	AddPlural("py", "pies")
+	AddPlural("qy", "qies")
+	AddPlural("ry", "ries")
+	AddPlural("sy", "sies")
+	AddPlural("ty", "ties")
+	AddPlural("vy", "vies")
+	AddPlural("wy", "wies")
+	AddPlural("xy", "xies")
+	AddPlural("zy", "zies")
+	AddPlural("x", "xes")
+	AddPlural("ch", "ches")
+	AddPlural("ss", "sses")
+	AddPlural("sh", "shes")
+	AddPlural("oe", "oes")
+	AddPlural("io", "ios")
+	AddPlural("o", "oes")
 }
 
-//  If the noun ends with ‑f or ‑fe, the f is often changed to ‑ve before adding the -s to form the plural version.
-func fPlural(s string) string {
-	if len(s) > 1 {
-		c := s[len(s)-2]
-		if isVowel(rune(c)) {
-			return s + "s"
-		}
-	}
-	s = strings.TrimSuffix(s, "f")
-	return s + "ves"
-}
+func AddPlural(ext string, repl string) {
+	pluralMoot.Lock()
+	defer pluralMoot.Unlock()
+	pluralRules = append(pluralRules, rule{
+		suffix: ext,
+		fn: func(s string) string {
+			s = s[:len(s)-len(ext)]
+			return s + repl
+		},
+	})
 
-func fePlural(s string) string {
-	return fPlural(strings.TrimSuffix(s, "e"))
-}
-
-// If a singular noun ends in ‑y and the letter before the -y is a consonant, change the ending to ‑ies to make the noun plural.
-func yPlural(s string) string {
-	if len(s) > 1 {
-		c := s[len(s)-2]
-		if isVowel(rune(c)) {
-			return s + "s"
-		}
-	}
-	s = strings.TrimSuffix(s, "y")
-	return s + "ies"
-}
-
-// If the singular noun ends in ‑us, the plural ending is frequently ‑i.
-func usPlural(s string) string {
-	s = strings.TrimSuffix(s, "us")
-	return s + "i"
-}
-
-// If the singular noun ends in ‑is, the plural ending is ‑es.
-func isPlural(s string) string {
-	s = strings.TrimSuffix(s, "is")
-	return s + "es"
-}
-
-// If the singular noun ends in ‑on, the plural ending is ‑a.
-func onPlural(s string) string {
-	s = strings.TrimSuffix(s, "on")
-	return s + "a"
-}
-
-func umPlural(s string) string {
-	s = strings.TrimSuffix(s, "um")
-	return s + "a"
-}
-
-var pluralRules = []rule{
-	{"es", noop},
-	{"ves", noop},
-	{"ies", noop},
-	{"i", noop},
-	{"es", noop},
-	{"a", noop},
-	{"ss", esPlural},
-	{"sh", esPlural},
-	{"ch", esPlural},
-	{"x", esPlural},
-	{"z", esPlural},
-	{"o", esPlural},
-	{"f", fPlural},
-	{"fe", fPlural},
-	{"y", yPlural},
-	{"us", usPlural},
-	{"is", isPlural},
-	{"on", onPlural},
-	{"um", umPlural},
+	pluralRules = append(pluralRules, rule{
+		suffix: repl,
+		fn: func(s string) string {
+			return s
+		},
+	})
 }
 
 var singleToPlural = map[string]string{
@@ -128,9 +170,6 @@ var singleToPlural = map[string]string{
 	"quiz":        "quizzes",
 	"series":      "series",
 	"octopus":     "octopi",
-	"person":      "people",
-	"man":         "men",
-	"child":       "children",
 	"equipment":   "equipment",
 	"information": "information",
 	"rice":        "rice",
@@ -142,10 +181,9 @@ var singleToPlural = map[string]string{
 	"police":      "police",
 	"dear":        "dear",
 	"goose":       "geese",
-	"woman":       "women",
 	"tooth":       "teeth",
 	"foot":        "feet",
-	"bus":         "busses",
+	"bus":         "buses",
 	"fez":         "fezzes",
 	"piano":       "pianos",
 	"halo":        "halos",
@@ -191,8 +229,6 @@ var singleToPlural = map[string]string{
 	"libretto":    "librettos",
 	"loaf":        "loaves",
 	"locus":       "loci",
-	"medium":      "mediums",
-	"memorandum":  "memoranda",
 	"minutia":     "minutiae",
 	"moose":       "moose",
 	"nebula":      "nebulae",
@@ -200,7 +236,6 @@ var singleToPlural = map[string]string{
 	"oasis":       "oases",
 	"offspring":   "offspring",
 	"opus":        "opera",
-	"ovum":        "ova",
 	"parenthesis": "parentheses",
 	"phenomenon":  "phenomena",
 	"phylum":      "phyla",
@@ -227,6 +262,12 @@ var singleToPlural = map[string]string{
 	"wife":        "wives",
 	"wolf":        "wolves",
 	"datum":       "data",
+	"testis":      "testes",
+	"alias":       "aliases",
+	"house":       "houses",
+	"shoe":        "shoes",
+	"news":        "news",
+	"ovum":        "ova",
 }
 
 var pluralToSingle = map[string]string{}

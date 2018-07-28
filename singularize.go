@@ -3,99 +3,155 @@ package flect
 // source for grammar rules: https://www.grammarly.com/blog/plural-nouns/
 import (
 	"strings"
+	"sync"
 )
+
+var singularMoot = &sync.RWMutex{}
 
 func Singularize(s string) string {
 	return New(s).Singularize()
 }
 
 func (i Ident) Singularize() string {
-	if len(i.parts) == 0 {
+	s := i.original
+	if len(s) == 0 {
 		return ""
 	}
-	li := len(i.parts) - 1
-	last := i.parts[li]
-	if _, ok := singleToPlural[strings.ToLower(last)]; ok {
-		return i.original
-	}
-	parts := i.parts[:li]
-	if p, ok := pluralToSingle[strings.ToLower(last)]; ok {
-		parts = append(parts, p)
-		return strings.Join(parts, " ")
-	}
 
+	singularMoot.RLock()
+	defer singularMoot.RUnlock()
+	ls := strings.ToLower(s)
+	if p, ok := pluralToSingle[ls]; ok {
+		return p
+	}
+	if _, ok := singleToPlural[ls]; ok {
+		return s
+	}
 	for _, r := range singularRules {
-		if strings.HasSuffix(last, r.suffix) {
-			parts = append(parts, r.fn(last))
-			return strings.Join(parts, " ")
+		if strings.HasSuffix(ls, r.suffix) {
+			return r.fn(s)
 		}
 	}
 
-	if len(last) > 2 {
-		if isVowel(rune(last[len(last)-2])) {
-			parts = append(parts, last)
-			return strings.Join(parts, " ")
-		}
-	}
-	//To make regular nouns plural, add ‑s to the end.
-	parts = append(parts, strings.TrimSuffix(last, "s"))
-	return strings.Join(parts, " ")
+	return s
 }
 
-//  If the singular noun ends in ‑s, -ss, -sh, -ch, -x, or -z, add ‑es to the end to make it plural.
-func esSingular(s string) string {
-	return strings.TrimSuffix(s, "es")
-}
+var singularRules = []rule{}
 
-//  If the noun ends with ‑f or ‑fe, the f is often changed to ‑ve before adding the -s to form the plural version.
-func vesSingular(s string) string {
-	s = strings.TrimSuffix(s, "ves")
-	return s + "f"
-}
+func AddSingular(ext string, repl string) {
+	singularMoot.Lock()
+	defer singularMoot.Unlock()
+	singularRules = append(singularRules, rule{
+		suffix: ext,
+		fn: func(s string) string {
+			s = s[:len(s)-len(ext)]
+			return s + repl
+		},
+	})
 
-// If a singular noun ends in ‑y and the letter before the -y is a consonant, change the ending to ‑ies to make the noun plural.
-func iesSingular(s string) string {
-	s = strings.TrimSuffix(s, "ies")
-	return s + "y"
-}
-
-// If the singular noun ends in ‑us, the plural ending is frequently ‑i.
-func iSingular(s string) string {
-	s = strings.TrimSuffix(s, "i")
-	return s + "us"
-}
-
-// If the singular noun ends in ‑on, the plural ending is ‑a.
-func aSingular(s string) string {
-	s = strings.TrimSuffix(s, "a")
-	return s + "on"
-}
-
-func exSingular(s string) string {
-	s = strings.TrimSuffix(s, "ex")
-	return s + "ix"
-}
-
-func ssSingular(s string) string {
-	if len(s) > 3 {
-		if isVowel(rune(s[len(s)-3])) {
+	singularRules = append(singularRules, rule{
+		suffix: repl,
+		fn: func(s string) string {
 			return s
-		}
-	}
-	return strings.TrimSuffix(s, "ss")
+		},
+	})
 }
 
-var singularRules = []rule{
-	{"ix", noop},
-	{"us", noop},
-	{"y", noop},
-	{"on", noop},
-	{"f", noop},
-	{"i", iSingular},
-	{"ss", ssSingular},
-	{"ies", iesSingular},
-	{"ves", vesSingular},
-	{"ex", exSingular},
-	{"a", aSingular},
-	{"es", esSingular},
+func init() {
+	AddSingular("ria", "rion")
+	AddSingular("news", "news")
+	AddSingular("halves", "half")
+	AddSingular("appendix", "appendix")
+	AddSingular("zzes", "zz")
+	AddSingular("ulas", "ula")
+	AddSingular("psis", "pse")
+	AddSingular("genus", "genera")
+	AddSingular("phyla", "phylum")
+	AddSingular("odice", "odex")
+	AddSingular("oxen", "ox")
+	AddSingular("ianos", "iano")
+	AddSingular("ulus", "uli")
+	AddSingular("mice", "mouse")
+	AddSingular("ouses", "ouse")
+	AddSingular("mni", "mnus")
+	AddSingular("ocus", "oci")
+	AddSingular("shoes", "shoe")
+	AddSingular("oasis", "oasis")
+	AddSingular("lice", "louse")
+	AddSingular("men", "man")
+	AddSingular("ta", "tum")
+	AddSingular("ia", "ium")
+	AddSingular("tives", "tive")
+	AddSingular("ldren", "ld")
+	AddSingular("people", "person")
+	AddSingular("aves", "afe")
+	AddSingular("uses", "us")
+	AddSingular("bves", "bfe")
+	AddSingular("cves", "cfe")
+	AddSingular("dves", "dfe")
+	AddSingular("eves", "efe")
+	AddSingular("gves", "gfe")
+	AddSingular("hves", "hfe")
+	AddSingular("chives", "chive")
+	AddSingular("ives", "ife")
+	AddSingular("movies", "movie")
+	AddSingular("jeans", "jeans")
+	AddSingular("cesses", "cess")
+	AddSingular("cess", "cess")
+	AddSingular("acti", "actus")
+	AddSingular("itzes", "itz")
+	AddSingular("usses", "uss")
+	AddSingular("uss", "uss")
+	AddSingular("jves", "jfe")
+	AddSingular("kves", "kfe")
+	AddSingular("mves", "mfe")
+	AddSingular("nves", "nfe")
+	AddSingular("moves", "move")
+	AddSingular("oves", "ofe")
+	AddSingular("pves", "pfe")
+	AddSingular("qves", "qfe")
+	AddSingular("sves", "sfe")
+	AddSingular("tves", "tfe")
+	AddSingular("uves", "ufe")
+	AddSingular("vves", "vfe")
+	AddSingular("wves", "wfe")
+	AddSingular("xves", "xfe")
+	AddSingular("yves", "yfe")
+	AddSingular("zves", "zfe")
+	AddSingular("hives", "hive")
+	AddSingular("lves", "lf")
+	AddSingular("rves", "rf")
+	AddSingular("quies", "quy")
+	AddSingular("bies", "by")
+	AddSingular("cies", "cy")
+	AddSingular("dies", "dy")
+	AddSingular("fies", "fy")
+	AddSingular("gies", "gy")
+	AddSingular("hies", "hy")
+	AddSingular("jies", "jy")
+	AddSingular("kies", "ky")
+	AddSingular("lies", "ly")
+	AddSingular("mies", "my")
+	AddSingular("nies", "ny")
+	AddSingular("pies", "py")
+	AddSingular("qies", "qy")
+	AddSingular("ries", "ry")
+	AddSingular("sies", "sy")
+	AddSingular("ties", "ty")
+	AddSingular("vies", "vy")
+	AddSingular("wies", "wy")
+	AddSingular("xies", "xy")
+	AddSingular("zies", "zy")
+	AddSingular("xes", "x")
+	AddSingular("ches", "ch")
+	AddSingular("sses", "ss")
+	AddSingular("shes", "sh")
+	AddSingular("oes", "o")
+	AddSingular("ress", "ress")
+	AddSingular("iri", "irus")
+	AddSingular("irus", "irus")
+	AddSingular("tuses", "tus")
+	AddSingular("tus", "tus")
+	AddSingular("s", "")
+	AddSingular("ss", "ss")
 }
