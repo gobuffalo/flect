@@ -10,14 +10,14 @@ import (
 //	Nice to see you! = nice_to_see_you
 //	widgetID = widget_id
 func Underscore(s string) string {
-	return New(s).Underscore()
+	return New(s).Underscore().String()
 }
 
 // Underscore a string
 //	bob dylan = bob_dylan
 //	Nice to see you! = nice_to_see_you
 //	widgetID = widget_id
-func (i Ident) Underscore() string {
+func (i Ident) Underscore() Ident {
 	var out []string
 	for _, part := range i.Parts {
 		var x string
@@ -30,5 +30,5 @@ func (i Ident) Underscore() string {
 			out = append(out, x)
 		}
 	}
-	return strings.ToLower(strings.Join(out, "_"))
+	return New(strings.ToLower(strings.Join(out, "_")))
 }

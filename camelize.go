@@ -10,14 +10,14 @@ import (
 //	widget_id = widgetID
 //	WidgetID = widgetID
 func Camelize(s string) string {
-	return New(s).Camelize()
+	return New(s).Camelize().String()
 }
 
 // Camelize returns a camelize version of a string
 //	bob dylan = bobDylan
 //	widget_id = widgetID
 //	WidgetID = widgetID
-func (i Ident) Camelize() string {
+func (i Ident) Camelize() Ident {
 	var out []string
 	for i, part := range i.Parts {
 		var x string
@@ -40,5 +40,5 @@ func (i Ident) Camelize() string {
 			out = append(out, x)
 		}
 	}
-	return strings.Join(out, "")
+	return New(strings.Join(out, ""))
 }

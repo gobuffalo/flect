@@ -10,14 +10,14 @@ import (
 //	"i've read a book! have you?" = "I've Read A Book! Have You?"
 //	"This is `code` ok" = "This Is `code` OK"
 func Titleize(s string) string {
-	return New(s).Titleize()
+	return New(s).Titleize().String()
 }
 
 // Titleize will capitalize the start of each part
 //	"Nice to see you!" = "Nice To See You!"
 //	"i've read a book! have you?" = "I've Read A Book! Have You?"
 //	"This is `code` ok" = "This Is `code` OK"
-func (i Ident) Titleize() string {
+func (i Ident) Titleize() Ident {
 	var parts []string
 	for _, part := range i.Parts {
 		var x string
@@ -27,5 +27,5 @@ func (i Ident) Titleize() string {
 		}
 		parts = append(parts, x)
 	}
-	return strings.Join(parts, " ")
+	return New(strings.Join(parts, " "))
 }

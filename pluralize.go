@@ -12,17 +12,17 @@ var pluralMoot = &sync.RWMutex{}
 //	person = people
 //	datum = data
 func Pluralize(s string) string {
-	return New(s).Pluralize()
+	return New(s).Pluralize().String()
 }
 
 // Pluralize returns a plural version of the string
 //	user = users
 //	person = people
 //	datum = data
-func (i Ident) Pluralize() string {
+func (i Ident) Pluralize() Ident {
 	s := i.Original
 	if len(s) == 0 {
-		return ""
+		return New("")
 	}
 
 	pluralMoot.RLock()
@@ -30,20 +30,20 @@ func (i Ident) Pluralize() string {
 
 	ls := strings.ToLower(s)
 	if _, ok := pluralToSingle[ls]; ok {
-		return s
+		return i
 	}
 	if p, ok := singleToPlural[ls]; ok {
-		return p
+		return New(p)
 	}
 	for _, r := range pluralRules {
 		if strings.HasSuffix(ls, r.suffix) {
-			return r.fn(s)
+			return New(r.fn(s))
 		}
 	}
 
 	if strings.HasSuffix(ls, "s") {
-		return s
+		return i
 	}
 
-	return s + "s"
+	return New(i.String() + "s")
 }
