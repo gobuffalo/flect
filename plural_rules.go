@@ -129,6 +129,7 @@ var singleToPlural = map[string]string{
 	"shoe":        "shoes",
 	"news":        "news",
 	"ovum":        "ova",
+	"foo":         "foos",
 }
 
 var pluralToSingle = map[string]string{}
