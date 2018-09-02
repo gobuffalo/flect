@@ -12,6 +12,8 @@ func Test_Package(t *testing.T) {
 	table := []tt{
 		{"Foo", "foo"},
 		{"Foo/Foo", "foo/foo"},
+		{"Foo_Foo", "foofoo"},
+		{"create_table", "createtable"},
 		{filepath.Join(gp, "src", "admin/widget"), "admin/widget"},
 		{filepath.Join(gp, "admin/widget"), "admin/widget"},
 		{filepath.Join(gp, "admin\\widget"), "admin/widget"},
