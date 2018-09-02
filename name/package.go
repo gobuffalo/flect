@@ -27,7 +27,7 @@ func (i Ident) Package() Ident {
 	for _, pre := range trims {
 		s = strings.TrimPrefix(s, pre)
 	}
-	return New(strings.Replace(s, "\\", "/", -1))
+	return Ident{New(strings.Replace(s, "\\", "/", -1)).ToLower()}
 }
 
 func goPath() string {

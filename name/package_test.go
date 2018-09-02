@@ -1,7 +1,6 @@
 package name
 
 import (
-	"fmt"
 	"path/filepath"
 	"testing"
 
@@ -10,8 +9,9 @@ import (
 
 func Test_Package(t *testing.T) {
 	gp := goPath()
-	fmt.Println("### gp ->", gp)
 	table := []tt{
+		{"Foo", "foo"},
+		{"Foo/Foo", "foo/foo"},
 		{filepath.Join(gp, "src", "admin/widget"), "admin/widget"},
 		{filepath.Join(gp, "admin/widget"), "admin/widget"},
 		{filepath.Join(gp, "admin\\widget"), "admin/widget"},
