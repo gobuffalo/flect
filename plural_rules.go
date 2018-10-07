@@ -165,7 +165,6 @@ func init() {
 	AddPlural("person", "people")
 	AddPlural("va", "vae")
 	AddPlural("leus", "li")
-	AddPlural("ld", "ldren")
 	AddPlural("oot", "eet")
 	AddPlural("oose", "eese")
 	AddPlural("box", "boxes")
