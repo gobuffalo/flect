@@ -50,3 +50,14 @@ func Test_New(t *testing.T) {
 		})
 	}
 }
+func Test_MarshalText(t *testing.T) {
+	r := require.New(t)
+
+	n := New("mark")
+	b, err := n.MarshalText()
+	r.NoError(err)
+	r.Equal("mark", string(b))
+
+	r.NoError((&n).UnmarshalText([]byte("bates")))
+	r.Equal("bates", n.String())
+}
