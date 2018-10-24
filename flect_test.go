@@ -35,6 +35,7 @@ func Test_LoadReader(t *testing.T) {
 
 var singlePluralAssertions = []tt{
 	{"", ""},
+	{"movie", "movies"},
 	{"ox", "oxen"},
 	{"user", "users"},
 	{"cat", "cats"},
@@ -158,6 +159,17 @@ var pluralSingularAssertions = []tt{}
 func init() {
 	for k, v := range singleToPlural {
 		singlePluralAssertions = append(singlePluralAssertions, tt{k, v})
+
+		// add some variations
+		// singlePluralAssertions = append(singlePluralAssertions, tt{strings.ToUpper(k), v})
+		// singlePluralAssertions = append(singlePluralAssertions, tt{strings.ToLower(k), v})
+		// for i, x := range k {
+		// 	n := k[:i] + strings.ToLower(string(x)) + k[i+1:]
+		// 	singlePluralAssertions = append(singlePluralAssertions, tt{n, v})
+		//
+		// 	n = k[:i] + strings.ToUpper(string(x)) + k[i+1:]
+		// 	singlePluralAssertions = append(singlePluralAssertions, tt{n, v})
+		// }
 	}
 
 	for _, a := range singlePluralAssertions {
