@@ -35,7 +35,8 @@ func init() {
 
 //LoadReader loads rules from io.Reader param
 func LoadReader(r io.Reader) error {
-	m := map[string]string{}
+	m := map[string]interface{}{}
+
 	err := json.NewDecoder(r).Decode(&m)
 	if err != nil {
 		return fmt.Errorf("could not decode inflection JSON from reader: %s", err)
@@ -46,9 +47,20 @@ func LoadReader(r io.Reader) error {
 	defer singularMoot.Unlock()
 
 	for s, p := range m {
-		singleToPlural[s] = p
-		pluralToSingle[p] = s
+		if ps, ok := p.(string); ok {
+			singleToPlural[s] = ps
+			pluralToSingle[ps] = s
+		}
+
+		if pa, ok := p.([]interface{}); ok && s == "_acronyms" {
+			for _, acronym := range pa {
+				key := (acronym).(string)
+				baseAcronyms[key] = true
+			}
+		}
+
 	}
+
 	return nil
 }
 

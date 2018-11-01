@@ -16,21 +16,31 @@ type tt struct {
 func Test_LoadReader(t *testing.T) {
 	r := require.New(t)
 	// in := `{"beatle": "the beatles", "xyz": "zyx"}`
-	m := map[string]string{
-		"beatle": "the beatles",
-		"xyz":    "zyx",
+	m := map[string]interface{}{
+		"beatle":    "the beatles",
+		"xyz":       "zyx",
+		"_acronyms": []string{"TLC", "LSA"},
 	}
 
 	b, err := json.Marshal(m)
 	r.NoError(err)
 
 	r.NoError(LoadReader(bytes.NewReader(b)))
-	for k, v := range m {
+
+	tcases := map[string]string{
+		"beatle": "the beatles",
+		"xyz":    "zyx",
+	}
+
+	for k, v := range tcases {
 		r.Equal(v, Pluralize(k))
 		r.Equal(v, Pluralize(v))
 		r.Equal(k, Singularize(k))
 		r.Equal(k, Singularize(v))
 	}
+
+	r.True(baseAcronyms["TLC"])
+	r.True(baseAcronyms["LSA"])
 }
 
 var singlePluralAssertions = []tt{
