@@ -15,6 +15,17 @@ import (
 	"unicode"
 )
 
+const (
+	//acronymsKey is the key we use to get acronyms from the inflections file
+	//p.e:
+	// #inflections.json
+	// {
+	// 	"house":"houses",
+	// 	"_acronyms": ["TSA", "LSA"]
+	// }
+	acronymsKey = "_acronyms"
+)
+
 func init() {
 	pwd, _ := os.Getwd()
 	cfg := filepath.Join(pwd, "inflections.json")
@@ -52,7 +63,7 @@ func LoadReader(r io.Reader) error {
 			pluralToSingle[ps] = s
 		}
 
-		if pa, ok := p.([]interface{}); ok && s == "_acronyms" {
+		if pa, ok := p.([]interface{}); ok && s == acronymsKey {
 			for _, acronym := range pa {
 				key := (acronym).(string)
 				baseAcronyms[key] = true
