@@ -13,34 +13,42 @@ type tt struct {
 	exp string
 }
 
-func Test_LoadReader(t *testing.T) {
+func Test_LoadInflections(t *testing.T) {
 	r := require.New(t)
-	// in := `{"beatle": "the beatles", "xyz": "zyx"}`
-	m := map[string]interface{}{
-		"beatle":    "the beatles",
-		"xyz":       "zyx",
-		"_acronyms": []string{"TLC", "LSA"},
+	m := map[string]string{
+		"beatle": "the beatles",
+		"xyz":    "zyx",
 	}
 
 	b, err := json.Marshal(m)
 	r.NoError(err)
 
-	r.NoError(LoadReader(bytes.NewReader(b)))
+	r.NoError(LoadInflections(bytes.NewReader(b)))
 
-	tcases := map[string]string{
-		"beatle": "the beatles",
-		"xyz":    "zyx",
-	}
-
-	for k, v := range tcases {
+	for k, v := range m {
 		r.Equal(v, Pluralize(k))
 		r.Equal(v, Pluralize(v))
 		r.Equal(k, Singularize(k))
 		r.Equal(k, Singularize(v))
 	}
+}
 
-	r.True(baseAcronyms["TLC"])
-	r.True(baseAcronyms["LSA"])
+func Test_LoadAcronyms(t *testing.T) {
+	r := require.New(t)
+	m := []string{
+		"ACC",
+		"TLC",
+		"LSA",
+	}
+
+	b, err := json.Marshal(m)
+	r.NoError(err)
+
+	r.NoError(LoadAcronyms(bytes.NewReader(b)))
+
+	for _, acronym := range m {
+		r.True(baseAcronyms[acronym])
+	}
 }
 
 var singlePluralAssertions = []tt{
