@@ -67,13 +67,6 @@ func toParts(s string) []string {
 			continue
 		}
 
-		if baseAcronyms[x] {
-			parts = xappend(parts, x)
-			x = cs
-			prev = c
-			continue
-		}
-
 		if unicode.IsUpper(c) && !unicode.IsUpper(prev) {
 			parts = xappend(parts, x)
 			x = cs
