@@ -37,7 +37,7 @@ func loadCustomData(defaultFile, env, readErrorMessage string, parser CustomData
 		return
 	}
 
-	if err = LoadInflections(bytes.NewReader(b)); err != nil {
+	if err = parser(bytes.NewReader(b)); err != nil {
 		fmt.Println(err)
 	}
 }
