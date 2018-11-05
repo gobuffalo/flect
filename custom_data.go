@@ -8,6 +8,8 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+
+	"github.com/gobuffalo/envy"
 )
 
 func init() {
@@ -21,11 +23,7 @@ type CustomDataParser func(io.Reader) error
 
 func loadCustomData(defaultFile, env, readErrorMessage string, parser CustomDataParser) {
 	pwd, _ := os.Getwd()
-	path := filepath.Join(pwd, defaultFile)
-
-	if p := os.Getenv(env); p != "" {
-		path = p
-	}
+	path := envy.Get(env, filepath.Join(pwd, defaultFile))
 
 	if _, err := os.Stat(path); err != nil {
 		return
