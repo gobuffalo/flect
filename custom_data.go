@@ -49,6 +49,9 @@ func LoadAcronyms(r io.Reader) error {
 		return fmt.Errorf("could not decode acronyms JSON from reader: %s", err)
 	}
 
+	acronymsMoot.Lock()
+	defer acronymsMoot.Unlock()
+
 	for _, acronym := range m {
 		baseAcronyms[acronym] = true
 	}
