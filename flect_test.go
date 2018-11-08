@@ -13,9 +13,8 @@ type tt struct {
 	exp string
 }
 
-func Test_LoadReader(t *testing.T) {
+func Test_LoadInflections(t *testing.T) {
 	r := require.New(t)
-	// in := `{"beatle": "the beatles", "xyz": "zyx"}`
 	m := map[string]string{
 		"beatle": "the beatles",
 		"xyz":    "zyx",
@@ -24,12 +23,31 @@ func Test_LoadReader(t *testing.T) {
 	b, err := json.Marshal(m)
 	r.NoError(err)
 
-	r.NoError(LoadReader(bytes.NewReader(b)))
+	r.NoError(LoadInflections(bytes.NewReader(b)))
+
 	for k, v := range m {
 		r.Equal(v, Pluralize(k))
 		r.Equal(v, Pluralize(v))
 		r.Equal(k, Singularize(k))
 		r.Equal(k, Singularize(v))
+	}
+}
+
+func Test_LoadAcronyms(t *testing.T) {
+	r := require.New(t)
+	m := []string{
+		"ACC",
+		"TLC",
+		"LSA",
+	}
+
+	b, err := json.Marshal(m)
+	r.NoError(err)
+
+	r.NoError(LoadAcronyms(bytes.NewReader(b)))
+
+	for _, acronym := range m {
+		r.True(baseAcronyms[acronym])
 	}
 }
 

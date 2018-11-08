@@ -4,53 +4,9 @@ Package flect is a new inflection engine to replace [https://github.com/markbate
 package flect
 
 import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-	"io"
-	"io/ioutil"
-	"os"
-	"path/filepath"
 	"strings"
 	"unicode"
 )
-
-func init() {
-	pwd, _ := os.Getwd()
-	cfg := filepath.Join(pwd, "inflections.json")
-	if p := os.Getenv("INFLECT_PATH"); p != "" {
-		cfg = p
-	}
-	if _, err := os.Stat(cfg); err == nil {
-		b, err := ioutil.ReadFile(cfg)
-		if err != nil {
-			fmt.Printf("could not read inflection file %s (%s)\n", cfg, err)
-			return
-		}
-		if err = LoadReader(bytes.NewReader(b)); err != nil {
-			fmt.Println(err)
-		}
-	}
-}
-
-//LoadReader loads rules from io.Reader param
-func LoadReader(r io.Reader) error {
-	m := map[string]string{}
-	err := json.NewDecoder(r).Decode(&m)
-	if err != nil {
-		return fmt.Errorf("could not decode inflection JSON from reader: %s", err)
-	}
-	pluralMoot.Lock()
-	defer pluralMoot.Unlock()
-	singularMoot.Lock()
-	defer singularMoot.Unlock()
-
-	for s, p := range m {
-		singleToPlural[s] = p
-		pluralToSingle[p] = s
-	}
-	return nil
-}
 
 var spaces = []rune{'_', ' ', ':', '-', '/'}
 

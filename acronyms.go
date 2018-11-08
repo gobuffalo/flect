@@ -1,5 +1,9 @@
 package flect
 
+import "sync"
+
+var acronymsMoot = &sync.RWMutex{}
+
 var baseAcronyms = map[string]bool{
 	"OK":    true,
 	"UTF8":  true,

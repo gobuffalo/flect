@@ -7,6 +7,8 @@ import (
 )
 
 func Test_Underscore(t *testing.T) {
+	baseAcronyms["TLC"] = true
+
 	table := []tt{
 		{"", ""},
 		{"bob dylan", "bob_dylan"},
@@ -14,6 +16,7 @@ func Test_Underscore(t *testing.T) {
 		{"*hello*", "hello"},
 		{"i've read a book! have you?", "ive_read_a_book_have_you"},
 		{"This is `code` ok", "this_is_code_ok"},
+		{"TLCForm", "tlc_form"},
 	}
 
 	for _, tt := range table {
