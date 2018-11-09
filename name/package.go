@@ -1,8 +1,7 @@
 package name
 
 import (
-	"os"
-	"os/exec"
+	"go/build"
 	"path/filepath"
 	"strings"
 )
@@ -20,23 +19,17 @@ func Package(s string) string {
 //	$GOPATH\src\foo\bar = foo/bar
 //	foo/bar = foo/bar
 func (i Ident) Package() Ident {
-	gp := goPath()
+	c := build.Default
+
 	s := i.Original
-	slash := string(filepath.Separator)
-	trims := []string{gp, slash, "src", slash}
-	for _, pre := range trims {
-		s = strings.TrimPrefix(s, pre)
+
+	for _, src := range c.SrcDirs() {
+		s = strings.TrimPrefix(s, src)
+		s = strings.TrimPrefix(s, filepath.Dir(src)) // encase there's no /src prefix
 	}
+
+	s = strings.TrimPrefix(s, string(filepath.Separator))
 	s = strings.Replace(s, "\\", "/", -1)
 	s = strings.Replace(s, "_", "", -1)
 	return Ident{New(s).ToLower()}
-}
-
-func goPath() string {
-	cmd := exec.Command("go", "env", "GOPATH")
-	b, err := cmd.CombinedOutput()
-	if err != nil {
-		return filepath.Join(os.Getenv("HOME"), "go")
-	}
-	return strings.TrimSpace(string(b))
 }
