@@ -1,5 +1,5 @@
 package name
 
 func (n Ident) URL() Ident {
-	return Ident{n.Pluralize().Underscore()}
+	return Ident{n.File().Pluralize()}
 }
