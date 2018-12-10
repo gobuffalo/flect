@@ -11,6 +11,7 @@ func Test_File(t *testing.T) {
 		{"", ""},
 		{"foo_bar", "foo_bar"},
 		{"admin/widget", "admin/widget"},
+		{"admin/widgets", "admin/widgets"},
 		{"widget", "widget"},
 		{"widgets", "widgets"},
 		{"User", "user"},

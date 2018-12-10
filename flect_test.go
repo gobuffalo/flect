@@ -53,6 +53,7 @@ func Test_LoadAcronyms(t *testing.T) {
 
 var singlePluralAssertions = []tt{
 	{"", ""},
+	{"human", "humans"},
 	{"movie", "movies"},
 	{"ox", "oxen"},
 	{"user", "users"},
