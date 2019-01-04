@@ -10,9 +10,10 @@ func Test_ParamID(t *testing.T) {
 	table := []tt{
 		{"foo_bar", "foo_bar_id"},
 		{"admin/widget", "admin_widget_id"},
-		{"admin/widgets", "admin_widgets_id"},
+		{"admin/widgets", "admin_widget_id"},
 		{"widget", "widget_id"},
 		{"User", "user_id"},
+		{"user", "user_id"},
 		{"UserID", "user_id"},
 	}
 
