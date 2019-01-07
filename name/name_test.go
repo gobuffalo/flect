@@ -1,6 +1,8 @@
 package name
 
 import (
+	"runtime"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -80,4 +82,11 @@ func Test_MarshalText(t *testing.T) {
 
 	r.NoError((&n).UnmarshalText([]byte("bates")))
 	r.Equal("bates", n.String())
+}
+
+func osify(s string) string {
+	if runtime.GOOS == "windows" {
+		return strings.Replace(s, "/", "\\", -1)
+	}
+	return s
 }
