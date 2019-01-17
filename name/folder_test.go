@@ -21,9 +21,9 @@ func Test_Folder(t *testing.T) {
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
 			r := require.New(st)
-			r.Equal(osify(tt.exp), Folder(tt.act))
-			r.Equal(osify(tt.exp), Folder(tt.exp))
-			r.Equal(osify(tt.exp)+".a.b", Folder(tt.act, ".a", ".b"))
+			r.Equal(tt.exp, Folder(tt.act))
+			r.Equal(tt.exp, Folder(tt.exp))
+			r.Equal(tt.exp+".a.b", Folder(tt.act, ".a", ".b"))
 		})
 	}
 }

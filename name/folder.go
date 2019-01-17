@@ -1,7 +1,6 @@
 package name
 
 import (
-	"path/filepath"
 	"regexp"
 	"strings"
 )
@@ -28,5 +27,5 @@ func (i Ident) Folder(exts ...string) Ident {
 		part = alphanum.ReplaceAllString(part, "")
 		parts = append(parts, part)
 	}
-	return New(strings.Join(parts, string(filepath.Separator)) + strings.Join(exts, ""))
+	return New(strings.Join(parts, "/") + strings.Join(exts, ""))
 }
