@@ -16,6 +16,7 @@ func Test_Folder(t *testing.T) {
 		{"widgets", "widgets"},
 		{"User", "user"},
 		{"U$er", "uer"},
+		{"AdminUser", "admin/user"},
 	}
 
 	for _, tt := range table {

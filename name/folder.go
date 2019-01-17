@@ -22,7 +22,12 @@ func Folder(s string, exts ...string) string {
 func (i Ident) Folder(exts ...string) Ident {
 	var parts []string
 
-	for _, part := range strings.Split(i.Original, "/") {
+	s := i.Original
+	if i.Pascalize().String() == s {
+		s = i.Underscore().String()
+		s = strings.Replace(s, "_", "/", -1)
+	}
+	for _, part := range strings.Split(s, "/") {
 		part = strings.ToLower(part)
 		part = alphanum.ReplaceAllString(part, "")
 		parts = append(parts, part)
