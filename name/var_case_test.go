@@ -51,3 +51,27 @@ func Test_VarCasePlural(t *testing.T) {
 		})
 	}
 }
+
+func Test_VarCase(t *testing.T) {
+	table := []tt{
+		{"foo_bar", "fooBar"},
+		{"admin/widget", "adminWidget"},
+		{"widget", "widget"},
+		{"widgets", "widgets"},
+		{"User", "user"},
+		{"FooBar", "fooBar"},
+		{"FooBars", "fooBars"},
+		{"status", "status"},
+		{"statuses", "statuses"},
+		{"Status", "status"},
+		{"Statuses", "statuses"},
+	}
+
+	for _, tt := range table {
+		t.Run(tt.act, func(st *testing.T) {
+			r := require.New(st)
+			r.Equal(tt.exp, VarCase(tt.act))
+			r.Equal(tt.exp, VarCase(tt.exp))
+		})
+	}
+}
