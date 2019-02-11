@@ -28,6 +28,7 @@ func Test_Camelize(t *testing.T) {
 		{"statuses", "statuses"},
 		{"People", "people"},
 		{"people", "people"},
+		{"ID", "id"},
 	}
 
 	for _, tt := range table {
