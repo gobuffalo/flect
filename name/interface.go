@@ -1,7 +1,7 @@
 package name
 
 import (
-	"errors"
+	"fmt"
 	"reflect"
 )
 
@@ -10,7 +10,8 @@ func Interface(x interface{}) (Ident, error) {
 	case string:
 		return New(t), nil
 	default:
-		to := reflect.TypeOf(x)
+		rv := reflect.Indirect(reflect.ValueOf(x))
+		to := rv.Type()
 		if len(to.Name()) > 0 {
 			return New(to.Name()), nil
 		}
@@ -22,5 +23,5 @@ func Interface(x interface{}) (Ident, error) {
 			return New(n.Pluralize().String()), nil
 		}
 	}
-	return New(""), errors.New("could not convert to Ident")
+	return New(""), fmt.Errorf("could not convert %T to Ident", x)
 }

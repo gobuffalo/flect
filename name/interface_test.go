@@ -17,6 +17,7 @@ func Test_Interface(t *testing.T) {
 	}{
 		{"foo", "foo", false},
 		{car{}, "car", false},
+		{&car{}, "car", false},
 		{[]car{}, "cars", false},
 		{false, "bool", false},
 	}
