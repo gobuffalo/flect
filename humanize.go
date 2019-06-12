@@ -13,7 +13,6 @@ func Humanize(s string) string {
 }
 
 // Humanize First letter of sentence capitalized
-// removing any dash if contains
 func (i Ident) Humanize() Ident {
 	if len(i.Original) == 0 {
 		return New("")
