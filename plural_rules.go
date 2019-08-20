@@ -166,6 +166,7 @@ func init() {
 	AddPlural("atus", "atuses")
 	AddPlural("ode", "odes")
 	AddPlural("person", "people")
+	AddPlural("hello", "hellos")
 	AddPlural("va", "vae")
 	AddPlural("leus", "li")
 	AddPlural("oot", "eet")

@@ -23,6 +23,7 @@ func Test_Tableize(t *testing.T) {
 		{"statuses", "statuses"},
 		{"People", "people"},
 		{"people", "people"},
+		{"BigPerson", "big_people"},
 	}
 
 	for _, tt := range table {
