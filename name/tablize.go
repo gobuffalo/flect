@@ -13,5 +13,5 @@ func Tableize(s string) string {
 //	Person = persons
 //	Admin/Widget = admin_widgets
 func (i Ident) Tableize() Ident {
-	return Ident{i.Pluralize().Underscore()}
+	return Ident{i.Underscore().Pluralize()}
 }
