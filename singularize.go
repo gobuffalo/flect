@@ -19,7 +19,7 @@ func Singularize(s string) string {
 //	SingularizeWithSize("user", 1) = user
 //	SingularizeWithSize("user", 2) = users
 func SingularizeWithSize(s string, i int) string {
-	if i == 1 {
+	if i == 1 || i == -1 {
 		return New(s).Singularize().String()
 	}
 	return New(s).Pluralize().String()
