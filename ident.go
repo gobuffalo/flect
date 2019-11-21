@@ -94,6 +94,19 @@ func toParts(s string) []string {
 var _ encoding.TextUnmarshaler = &Ident{}
 var _ encoding.TextMarshaler = &Ident{}
 
+// LastPart returns the last part/word of the original string
+func (i *Ident) LastPart() string {
+	if len(i.Parts) == 0 {
+		return ""
+	}
+	return i.Parts[len(i.Parts)-1]
+}
+
+// ReplaceSuffix creates a new Ident with the original suffix replaced by new
+func (i Ident) ReplaceSuffix(orig string, new string) Ident {
+	return New(strings.TrimSuffix(i.Original, orig) + new)
+}
+
 //UnmarshalText unmarshalls byte array into the Ident
 func (i *Ident) UnmarshalText(data []byte) error {
 	(*i) = New(string(data))

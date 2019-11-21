@@ -20,7 +20,7 @@ func Pluralize(s string) string {
 //	person = people
 //	datum = data
 func (i Ident) Pluralize() Ident {
-	s := i.Original
+	s := i.LastPart()
 	if len(s) == 0 {
 		return New("")
 	}
@@ -33,11 +33,11 @@ func (i Ident) Pluralize() Ident {
 		return i
 	}
 	if p, ok := singleToPlural[ls]; ok {
-		return New(p)
+		return i.ReplaceSuffix(s, p)
 	}
 	for _, r := range pluralRules {
 		if strings.HasSuffix(ls, r.suffix) {
-			return New(r.fn(s))
+			return i.ReplaceSuffix(s, r.fn(s))
 		}
 	}
 
