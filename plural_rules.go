@@ -180,7 +180,6 @@ func init() {
 	AddPlural("ula", "ulae")
 	AddPlural("isis", "ises")
 	AddPlural("use", "uses")
-	AddPlural("olves", "olf")
 	AddPlural("lf", "lves")
 	AddPlural("rf", "rves")
 	AddPlural("afe", "aves")
