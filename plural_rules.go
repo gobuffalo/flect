@@ -127,7 +127,6 @@ var singleToPlural = map[string]string{
 	"datum":       "data",
 	"testis":      "testes",
 	"alias":       "aliases",
-	"house":       "houses",
 	"shoe":        "shoes",
 	"news":        "news",
 	"ovum":        "ova",
@@ -180,7 +179,7 @@ func init() {
 	AddPlural("ex", "ices")
 	AddPlural("ula", "ulae")
 	AddPlural("isis", "ises")
-	AddPlural("ouses", "ouse")
+	AddPlural("use", "uses")
 	AddPlural("olves", "olf")
 	AddPlural("lf", "lves")
 	AddPlural("rf", "rves")
