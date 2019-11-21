@@ -157,6 +157,7 @@ var singlePluralAssertions = []tt{
 	{"mouse", "mice"},
 	{"louse", "lice"},
 	{"house", "houses"},
+	{"spouse", "spouses"},
 	{"octopus", "octopi"},
 	{"virus", "viri"},
 	{"alias", "aliases"},
