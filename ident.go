@@ -103,7 +103,7 @@ func (i *Ident) LastPart() string {
 }
 
 // ReplaceSuffix creates a new Ident with the original suffix replaced by new
-func (i Ident) ReplaceSuffix(orig string, new string) Ident {
+func (i Ident) ReplaceSuffix(orig, new string) Ident {
 	return New(strings.TrimSuffix(i.Original, orig) + new)
 }
 
