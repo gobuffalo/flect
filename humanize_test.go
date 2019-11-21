@@ -15,6 +15,8 @@ func Test_Humanize(t *testing.T) {
 		{"employee_id", "Employee ID"},
 		{"employee_ID", "Employee ID"},
 		{"first_name", "First name"},
+		{"first_Name", "First Name"},
+		{"firstName", "First Name"},
 	}
 
 	for _, tt := range table {
