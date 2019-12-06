@@ -152,7 +152,6 @@ type singularToPluralSuffix struct {
 }
 
 var singularToPluralSuffixList = []singularToPluralSuffix{
-	{"appendix", "appendix"},
 	{"iterion", "iteria"},
 	{"campus", "campuses"},
 	{"genera", "genus"},
