@@ -172,6 +172,10 @@ var singlePluralAssertions = []tt{
 	{"prize", "prizes"},
 	{"edge", "edges"},
 	{"database", "databases"},
+	{"circus", "circuses"},
+	{"plus", "pluses"},
+	{"fuse", "fuses"},
+	{"prometheus", "prometheuses"},
 }
 
 var pluralSingularAssertions = []tt{}
