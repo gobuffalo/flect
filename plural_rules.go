@@ -159,7 +159,6 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"randum", "randa"},
 	{"actus", "acti"},
 	{"adium", "adia"},
-	{"alias", "aliases"},
 	{"basis", "basis"},
 	{"child", "children"},
 	{"chive", "chives"},
