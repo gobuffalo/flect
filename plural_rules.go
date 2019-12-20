@@ -255,7 +255,6 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"ly", "lies"},
 	{"my", "mies"},
 	{"ny", "nies"},
-	{"ox", "oxen"},
 	{"py", "pies"},
 	{"qy", "qies"},
 	{"rf", "rves"},

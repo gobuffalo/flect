@@ -103,6 +103,7 @@ var singlePluralAssertions = []tt{
 	{"fix", "fixes"},
 	{"ovum", "ova"},
 	{"box", "boxes"},
+	{"fox", "foxes"},
 	{"process", "processes"},
 	{"address", "addresses"},
 	{"case", "cases"},
