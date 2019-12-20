@@ -48,7 +48,6 @@ var singleToPlural = map[string]string{
 	"crisis":      "crises",
 	"curriculum":  "curriculums",
 	"datum":       "data",
-	"dear":        "dear",
 	"deer":        "deer",
 	"diagnosis":   "diagnoses",
 	"die":         "dice",
