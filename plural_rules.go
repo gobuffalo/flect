@@ -36,6 +36,7 @@ var singleToPlural = map[string]string{
 	"basis":       "bases",
 	"beau":        "beaus",
 	"bison":       "bison",
+	"build":       "builds",
 	"bureau":      "bureaus",
 	"bus":         "buses",
 	"campus":      "campuses",
