@@ -105,6 +105,7 @@ var singleToPlural = map[string]string{
 	"prognosis":   "prognoses",
 	"prometheus":  "prometheuses",
 	"quiz":        "quizzes",
+	"quota":       "quotas",
 	"radius":      "radiuses",
 	"referendum":  "referendums",
 	"ress":        "resses",
