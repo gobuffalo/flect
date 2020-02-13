@@ -176,6 +176,8 @@ var singlePluralAssertions = []tt{
 	{"plus", "pluses"},
 	{"fuse", "fuses"},
 	{"prometheus", "prometheuses"},
+	{"field", "fields"},
+	{"custom_field", "custom_fields"},
 }
 
 var pluralSingularAssertions = []tt{}
