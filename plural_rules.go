@@ -132,7 +132,6 @@ var singleToPlural = map[string]string{
 	"tuna":        "tuna",
 	"vertebra":    "vertebrae",
 	"vertix":      "vertices",
-	"vertex":      "vertices",
 	"vita":        "vitae",
 	"vortex":      "vortices",
 	"wharf":       "wharves",
