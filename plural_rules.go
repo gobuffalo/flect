@@ -111,6 +111,7 @@ var singleToPlural = map[string]string{
 	"ress":        "resses",
 	"rice":        "rice",
 	"salmon":      "salmon",
+	"sex":         "sexes",
 	"series":      "series",
 	"sheep":       "sheep",
 	"shoe":        "shoes",
