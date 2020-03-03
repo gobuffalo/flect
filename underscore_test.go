@@ -27,3 +27,22 @@ func Test_Underscore(t *testing.T) {
 		})
 	}
 }
+
+func Benchmark_Underscore(b *testing.B) {
+
+	table := []string{
+		"",
+		"bob dylan",
+		"Nice to see you!",
+		"*hello*",
+		"i've read a book! have you?",
+		"This is `code` ok",
+		"TLCForm",
+	}
+
+	for n := 0; n < b.N; n++ {
+		for i := range table {
+			Underscore(table[i])
+		}
+	}
+}
