@@ -28,6 +28,8 @@ func Test_Camelize(t *testing.T) {
 		{"statuses", "statuses"},
 		{"People", "people"},
 		{"people", "people"},
+		{"ip_address", "ipAddress"},
+		{"some_url", "someURL"},
 	}
 
 	for _, tt := range table {
