@@ -3,7 +3,7 @@ package name
 import (
 	"strings"
 
-	"github.com/gobuffalo/flect"
+	"github.com/swiftcarrot/flect"
 )
 
 // File creates a suitable file name

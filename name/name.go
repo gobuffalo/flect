@@ -4,7 +4,7 @@ import (
 	"encoding"
 	"strings"
 
-	"github.com/gobuffalo/flect"
+	"github.com/swiftcarrot/flect"
 )
 
 // Proper pascalizes and singularizes the string

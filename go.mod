@@ -1,4 +1,4 @@
-module github.com/gobuffalo/flect
+module github.com/swiftcarrot/flect
 
 go 1.13
 
