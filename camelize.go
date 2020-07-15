@@ -18,6 +18,10 @@ func Camelize(s string) string {
 //	widget_id = widgetID
 //	WidgetID = widgetID
 func (i Ident) Camelize() Ident {
+	if i.Original == "ID" || i.Original == "id" {
+		return New("id")
+	}
+
 	var out []string
 	for i, part := range i.Parts {
 		var x string

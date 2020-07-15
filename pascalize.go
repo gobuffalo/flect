@@ -17,6 +17,10 @@ func Pascalize(s string) string {
 //	bob dylan = BobDylan
 //	widget_id = WidgetID
 func (i Ident) Pascalize() Ident {
+	if i.Original == "ID" || i.Original == "id" {
+		return New("ID")
+	}
+
 	c := i.Camelize()
 	if len(c.String()) == 0 {
 		return c
