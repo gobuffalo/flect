@@ -122,6 +122,7 @@ var singleToPlural = map[string]string{
 	"swine":       "swine",
 	"syllabus":    "syllabi",
 	"symposium":   "symposiums",
+	"synapse":     "synapses",
 	"synopsis":    "synopses",
 	"tableau":     "tableaus",
 	"testis":      "testes",
