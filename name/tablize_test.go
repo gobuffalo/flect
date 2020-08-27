@@ -24,6 +24,7 @@ func Test_Tableize(t *testing.T) {
 		{"People", "people"},
 		{"people", "people"},
 		{"BigPerson", "big_people"},
+		{"Wild Ox", "wild_oxen"},
 	}
 
 	for _, tt := range table {
