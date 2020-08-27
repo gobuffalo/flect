@@ -10,9 +10,9 @@ func Test_Tableize(t *testing.T) {
 	table := []tt{
 		{"", ""},
 		{"bob dylan", "bob_dylans"},
-		{"Nice to see you!", "nice_to_see_yous"},
+		{"Nice to see you!", "nice_to_see_you"},
 		{"*hello*", "hellos"},
-		{"i've read a book! have you?", "ive_read_a_book_have_yous"},
+		{"i've read a book! have you?", "ive_read_a_book_have_you"},
 		{"This is `code` ok", "this_is_code_oks"},
 		{"foo_bar", "foo_bars"},
 		{"admin/widget", "admin_widgets"},
