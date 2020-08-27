@@ -64,3 +64,49 @@ func Test_MarshalText(t *testing.T) {
 	r.NoError((&n).UnmarshalText([]byte("bates")))
 	r.Equal("bates", n.String())
 }
+
+func Benchmark_New(b *testing.B) {
+
+	table := []string{
+		"",
+		"widget",
+		"widget_id",
+		"WidgetID",
+		"Widget_ID",
+		"widget_ID",
+		"widget/ID",
+		"widgetID",
+		"widgetName",
+		"JWTName",
+		"JWTname",
+		"jwtname",
+		"sql",
+		"sQl",
+		"id",
+		"Id",
+		"iD",
+		"html",
+		"Html",
+		"HTML",
+		"with `code` inside",
+		"Donald E. Knuth",
+		"Random text with *(bad)* characters",
+		"Allow_Under_Scores",
+		"Trailing bad characters!@#",
+		"!@#Leading bad characters",
+		"Squeeze	 separators",
+		"Test with + sign",
+		"Malmö",
+		"Garçons",
+		"Opsů",
+		"Ærøskøbing",
+		"Aßlar",
+		"Japanese: 日本語",
+	}
+
+	for n := 0; n < b.N; n++ {
+		for i := range table {
+			New(table[i])
+		}
+	}
+}

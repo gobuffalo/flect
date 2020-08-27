@@ -180,6 +180,11 @@ var singlePluralAssertions = []tt{
 	{"prometheus", "prometheuses"},
 	{"vedalia", "vedalias"},
 	{"media", "media"},
+	{"field", "fields"},
+	{"custom_field", "custom_fields"},
+	{"sportsEquipment", "sportsEquipment"},
+	{"payment_information", "payment_information"},
+	{"great_person", "great_people"},
 }
 
 var pluralSingularAssertions = []tt{}
