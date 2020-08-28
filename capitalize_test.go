@@ -15,6 +15,7 @@ func Test_Capitalize(t *testing.T) {
 		{"widget_id", "Widget_id"},
 		{"widget_ID", "Widget_ID"},
 		{"widget ID", "Widget ID"},
+		{"гофер", "Гофер"}, // it's "gopher" in Ukrainian
 	}
 
 	for _, tt := range table {
