@@ -18,6 +18,8 @@ func Test_Pascalize(t *testing.T) {
 		{"i've read a book! have you?", "IveReadABookHaveYou"},
 		{"This is `code` ok", "ThisIsCodeOK"},
 		{"id", "ID"},
+		{"ip_address", "IPAddress"},
+		{"some_url", "SomeURL"},
 	}
 
 	for _, tt := range table {
