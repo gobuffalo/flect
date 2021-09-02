@@ -10,6 +10,8 @@ func Test_Pascalize(t *testing.T) {
 	table := []tt{
 		{"", ""},
 		{"bob dylan", "BobDylan"},
+		{"ID", "ID"},
+		{"id", "ID"},
 		{"widgetID", "WidgetID"},
 		{"widget_ID", "WidgetID"},
 		{"Widget_ID", "WidgetID"},

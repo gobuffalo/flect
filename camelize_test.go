@@ -10,6 +10,8 @@ func Test_Camelize(t *testing.T) {
 	table := []tt{
 		{"", ""},
 		{"bob dylan", "bobDylan"},
+		{"id", "id"},
+		{"ID", "id"},
 		{"widgetID", "widgetID"},
 		{"widget_ID", "widgetID"},
 		{"Widget_ID", "widgetID"},
