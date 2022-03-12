@@ -224,7 +224,6 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"oci", "ocus"},
 	{"ode", "odes"},
 	{"ofe", "oves"},
-	{"oot", "eet"},
 	{"pfe", "pves"},
 	{"pse", "psis"},
 	{"qfe", "qves"},
