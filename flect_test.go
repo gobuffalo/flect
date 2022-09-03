@@ -176,6 +176,7 @@ var singlePluralAssertions = []tt{
 	{"tooth", "teeth"},
 	{"truss", "trusses"},
 	{"user", "users"},
+	{"user_custom_field", "user_custom_fields"},
 	{"vedalia", "vedalias"},
 	{"virus", "viri"},
 	{"wife", "wives"},
