@@ -9,14 +9,18 @@ import (
 func Test_Folder(t *testing.T) {
 	table := []tt{
 		{"", ""},
-		{"foo_bar", "foo_bar"},
 		{"admin/widget", "admin/widget"},
 		{"admin/widgets", "admin/widgets"},
 		{"widget", "widget"},
 		{"widgets", "widgets"},
 		{"User", "user"},
-		{"U$er", "uer"},
-		{"AdminUser", "admin/user"},
+		{"U$er", "u_er"},
+		{"adminuser", "adminuser"},
+		{"Adminuser", "adminuser"},
+		{"AdminUser", "admin_user"},
+		{"adminUser", "admin_user"},
+		{"admin-user", "admin_user"},
+		{"admin_user", "admin_user"},
 	}
 
 	for _, tt := range table {
