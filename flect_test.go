@@ -16,8 +16,8 @@ type tt struct {
 func Test_LoadInflections(t *testing.T) {
 	r := require.New(t)
 	m := map[string]string{
-		"beatle": "the beatles",
-		"xyz":    "zyx",
+		"baby": "bebe",
+		"xyz":  "zyx",
 	}
 
 	b, err := json.Marshal(m)
@@ -31,6 +31,30 @@ func Test_LoadInflections(t *testing.T) {
 		r.Equal(k, Singularize(k))
 		r.Equal(k, Singularize(v))
 	}
+}
+
+func Test_LoadInflectionsWrongSingular(t *testing.T) {
+	r := require.New(t)
+	m := map[string]string{
+		"a file": "files",
+	}
+
+	b, err := json.Marshal(m)
+	r.NoError(err)
+
+	r.Error(LoadInflections(bytes.NewReader(b)))
+}
+
+func Test_LoadInflectionsWrongPlural(t *testing.T) {
+	r := require.New(t)
+	m := map[string]string{
+		"beatle": "the beatles",
+	}
+
+	b, err := json.Marshal(m)
+	r.NoError(err)
+
+	r.Error(LoadInflections(bytes.NewReader(b)))
 }
 
 func Test_LoadAcronyms(t *testing.T) {
@@ -53,6 +77,16 @@ func Test_LoadAcronyms(t *testing.T) {
 
 var singlePluralAssertions = []tt{
 	{"", ""},
+	{"Car", "Cars"},
+	{"Boy", "Boys"},
+	{"GoodBoy", "GoodBoys"},
+	{"Axis", "Axes"},
+	{"Child", "Children"},
+	{"GoodChild", "GoodChildren"},
+	{"SmartPerson", "SmartPeople"},
+	{"SuperbOx", "SuperbOxen"},
+	{"WildOx", "WildOxen"},
+	{"wild_ox", "wild_oxen"},
 	{"ability", "abilities"},
 	{"address", "addresses"},
 	{"agency", "agencies"},
