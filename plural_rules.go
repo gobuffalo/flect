@@ -3,15 +3,20 @@ package flect
 var pluralRules = []rule{}
 
 // AddPlural adds a rule that will replace the given suffix with the replacement suffix.
+// The name is confusing. This function will be deprecated in the next release.
 func AddPlural(suffix string, repl string) {
+	InsertPluralRule(suffix, repl)
+}
+
+// InsertPluralRule inserts a rule that will replace the given suffix with
+// the repl(acement) at the begining of the list of the pluralize rules.
+func InsertPluralRule(suffix, repl string) {
 	pluralMoot.Lock()
 	defer pluralMoot.Unlock()
+
 	pluralRules = append([]rule{{
 		suffix: suffix,
-		fn: func(s string) string {
-			s = s[:len(s)-len(suffix)]
-			return s + repl
-		},
+		fn:     simpleRuleFunc(suffix, repl),
 	}}, pluralRules...)
 
 	pluralRules = append([]rule{{
@@ -280,7 +285,7 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 
 func init() {
 	for i := len(singularToPluralSuffixList) - 1; i >= 0; i-- {
-		AddPlural(singularToPluralSuffixList[i].singular, singularToPluralSuffixList[i].plural)
-		AddSingular(singularToPluralSuffixList[i].plural, singularToPluralSuffixList[i].singular)
+		InsertPluralRule(singularToPluralSuffixList[i].singular, singularToPluralSuffixList[i].plural)
+		InsertSingularRule(singularToPluralSuffixList[i].plural, singularToPluralSuffixList[i].singular)
 	}
 }
