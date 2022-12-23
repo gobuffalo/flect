@@ -25,6 +25,17 @@ func InsertPluralRule(suffix, repl string) {
 	}}, pluralRules...)
 }
 
+type word struct {
+	singular       string
+	plural         string
+	alternative    string
+	unidirectional bool // plural to singular is not possible (or bad)
+	uncountable    bool
+}
+
+var dictionary = []word{
+}
+
 var singleToPlural = map[string]string{
 	"aircraft":    "aircraft",
 	"alias":       "aliases",
