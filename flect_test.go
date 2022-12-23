@@ -75,7 +75,12 @@ func Test_LoadAcronyms(t *testing.T) {
 	}
 }
 
-var singlePluralAssertions = []tt{
+type dict struct {
+	singular string
+	plural   string
+}
+
+var singlePluralAssertions = []dict{
 	{"", ""},
 	{"Car", "Cars"},
 	{"Boy", "Boys"},
@@ -220,11 +225,9 @@ var singlePluralAssertions = []tt{
 	{"woman", "women"},
 }
 
-var pluralSingularAssertions = []tt{}
-
 func init() {
 	for k, v := range singleToPlural {
-		singlePluralAssertions = append(singlePluralAssertions, tt{k, v})
+		singlePluralAssertions = append(singlePluralAssertions, dict{k, v})
 
 		// add some variations
 		// singlePluralAssertions = append(singlePluralAssertions, tt{strings.ToUpper(k), v})
@@ -236,9 +239,5 @@ func init() {
 		// 	n = k[:i] + strings.ToUpper(string(x)) + k[i+1:]
 		// 	singlePluralAssertions = append(singlePluralAssertions, tt{n, v})
 		// }
-	}
-
-	for _, a := range singlePluralAssertions {
-		pluralSingularAssertions = append(pluralSingularAssertions, tt{act: a.exp, exp: a.act})
 	}
 }
