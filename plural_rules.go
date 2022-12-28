@@ -1,5 +1,7 @@
 package flect
 
+import "fmt"
+
 var pluralRules = []rule{}
 
 // AddPlural adds a rule that will replace the given suffix with the replacement suffix.
@@ -31,13 +33,56 @@ type word struct {
 	alternative    string
 	unidirectional bool // plural to singular is not possible (or bad)
 	uncountable    bool
+	exact          bool
 }
 
+// dictionary is the main table for singularize and pluralize.
+// All words in the dictionary will be added to singleToPlural, pluralToSingle
+// and singlePluralAssertions by init() functions.
 var dictionary = []word{
+	// identicals https://en.wikipedia.org/wiki/English_plurals#Nouns_with_identical_singular_and_plural
+	{singular: "bison", plural: "bison"},
+	{singular: "deer", plural: "deer"},
+	{singular: "moose", plural: "moose"},
+	{singular: "fish", plural: "fish", alternative: "fishes"},
+	{singular: "salmon", plural: "salmon", alternative: "salmons"},
+	{singular: "sheep", plural: "sheep"},
+	{singular: "shrimp", plural: "shrimp", alternative: "shrimps"},
+	{singular: "trout", plural: "trout", alternative: "trouts"},
+	{singular: "aircraft", plural: "aircraft"},
+	{singular: "blues", plural: "blues", unidirectional: true},
+	{singular: "chassis", plural: "chassis"},
+	{singular: "series", plural: "series"},
+	{singular: "species", plural: "species"},
+	{singular: "police", plural: "police"},
+	// -en https://en.wikipedia.org/wiki/English_plurals#Plurals_in_-(e)n
+	{singular: "ox", plural: "oxen", exact: true},
+	{singular: "child", plural: "children"},
+	// apophonic https://en.wikipedia.org/wiki/English_plurals#Apophonic_plurals
+	{singular: "foot", plural: "feet"},
+	{singular: "goose", plural: "geese"},
+	{singular: "louse", plural: "lice"},
+	{singular: "man", plural: "men"},
+	{singular: "human", plural: "humans"}, // not humen
+	{singular: "mouse", plural: "mice"},
+	{singular: "tooth", plural: "teeth"},
+	{singular: "woman", plural: "women"},
+	// misc https://en.wikipedia.org/wiki/English_plurals#Miscellaneous_irregular_plurals
+	{singular: "person", plural: "people"},
+	{singular: "die", plural: "dice"},
+
+	{singular: "base", plural: "bases"}, // popular case
+	{singular: "basis", plural: "bases", unidirectional: true},
+
+	{singular: "media", plural: "media"}, // popular case: media -> media
+	{singular: "medium", plural: "media", alternative: "mediums", unidirectional: true},
+	{singular: "stadium", plural: "stadiums", alternative: "stadia"},
 }
 
+// singleToPlural is the highest priority map for Pluralize().
+// singularToPluralSuffixList is used to build pluralRules for suffixes and
+// compound words.
 var singleToPlural = map[string]string{
-	"aircraft":    "aircraft",
 	"alias":       "aliases",
 	"alumna":      "alumnae",
 	"alumnus":     "alumni",
@@ -49,14 +94,11 @@ var singleToPlural = map[string]string{
 	"axis":        "axes",
 	"bacillus":    "bacilli",
 	"bacterium":   "bacteria",
-	"basis":       "bases",
 	"beau":        "beaus",
-	"bison":       "bison",
 	"bureau":      "bureaus",
 	"bus":         "buses",
 	"campus":      "campuses",
 	"caucus":      "caucuses",
-	"child":       "children",
 	"château":     "châteaux",
 	"circus":      "circuses",
 	"codex":       "codices",
@@ -66,28 +108,22 @@ var singleToPlural = map[string]string{
 	"criterion":   "criteria",
 	"curriculum":  "curriculums",
 	"datum":       "data",
-	"deer":        "deer",
 	"diagnosis":   "diagnoses",
-	"die":         "dice",
 	"dwarf":       "dwarves",
 	"ellipsis":    "ellipses",
 	"equipment":   "equipment",
 	"erratum":     "errata",
 	"fez":         "fezzes",
-	"fish":        "fish",
 	"focus":       "foci",
 	"foo":         "foos",
-	"foot":        "feet",
 	"formula":     "formulas",
 	"fungus":      "fungi",
 	"genus":       "genera",
-	"goose":       "geese",
 	"graffito":    "graffiti",
 	"grouse":      "grouse",
 	"half":        "halves",
 	"halo":        "halos",
 	"hoof":        "hooves",
-	"human":       "humans",
 	"hypothesis":  "hypotheses",
 	"index":       "indices",
 	"information": "information",
@@ -96,13 +132,9 @@ var singleToPlural = map[string]string{
 	"libretto":    "librettos",
 	"loaf":        "loaves",
 	"locus":       "loci",
-	"louse":       "lice",
 	"matrix":      "matrices",
-	"medium":      "media",
 	"minutia":     "minutiae",
 	"money":       "money",
-	"moose":       "moose",
-	"mouse":       "mice",
 	"nebula":      "nebulae",
 	"news":        "news",
 	"nucleus":     "nuclei",
@@ -111,15 +143,12 @@ var singleToPlural = map[string]string{
 	"offspring":   "offspring",
 	"opus":        "opera",
 	"ovum":        "ova",
-	"ox":          "oxen",
 	"parenthesis": "parentheses",
-	"person":      "people",
 	"phenomenon":  "phenomena",
 	"photo":       "photos",
 	"phylum":      "phyla",
 	"piano":       "pianos",
 	"plus":        "pluses",
-	"police":      "police",
 	"prognosis":   "prognoses",
 	"prometheus":  "prometheuses",
 	"quiz":        "quizzes",
@@ -128,13 +157,8 @@ var singleToPlural = map[string]string{
 	"referendum":  "referendums",
 	"ress":        "resses",
 	"rice":        "rice",
-	"salmon":      "salmon",
 	"sex":         "sexes",
-	"series":      "series",
-	"sheep":       "sheep",
 	"shoe":        "shoes",
-	"shrimp":      "shrimp",
-	"species":     "species",
 	"stimulus":    "stimuli",
 	"stratum":     "strata",
 	"swine":       "swine",
@@ -146,8 +170,6 @@ var singleToPlural = map[string]string{
 	"testis":      "testes",
 	"thesis":      "theses",
 	"thief":       "thieves",
-	"tooth":       "teeth",
-	"trout":       "trout",
 	"tuna":        "tuna",
 	"vedalia":     "vedalias",
 	"vertebra":    "vertebrae",
@@ -156,16 +178,45 @@ var singleToPlural = map[string]string{
 	"vortex":      "vortices",
 	"wharf":       "wharves",
 	"wife":        "wives",
-	"woman":       "women",
 	"wolf":        "wolves",
 	"you":         "you",
 }
 
+// pluralToSingle is the highest priority map for Singularize().
+// singularToPluralSuffixList is used to build singularRules for suffixes and
+// compound words.
 var pluralToSingle = map[string]string{}
 
+// NOTE: This map should not be built as reverse map of singleToPlural since
+// there are words that has the same plurals.
 func init() {
+	// FIXME: remove when the data fully migrated to dictionary.
 	for k, v := range singleToPlural {
 		pluralToSingle[v] = k
+	}
+}
+
+// build singleToPlural and pluralToSingle with dictionary
+func init() {
+	for _, wd := range dictionary {
+		if singleToPlural[wd.singular] != "" {
+			panic(fmt.Errorf("map singleToPlural already has an entry for %s", wd.singular))
+		}
+		singleToPlural[wd.singular] = wd.plural
+
+		if !wd.unidirectional {
+			if pluralToSingle[wd.plural] != "" {
+				panic(fmt.Errorf("map pluralToSingle already has an entry for %s", wd.plural))
+			}
+			pluralToSingle[wd.plural] = wd.singular
+		}
+
+		if wd.alternative != "" {
+			if pluralToSingle[wd.alternative] != "" {
+				panic(fmt.Errorf("map pluralToSingle already has an entry for %s", wd.alternative))
+			}
+			pluralToSingle[wd.alternative] = wd.singular
+		}
 	}
 }
 
@@ -298,5 +349,19 @@ func init() {
 	for i := len(singularToPluralSuffixList) - 1; i >= 0; i-- {
 		InsertPluralRule(singularToPluralSuffixList[i].singular, singularToPluralSuffixList[i].plural)
 		InsertSingularRule(singularToPluralSuffixList[i].plural, singularToPluralSuffixList[i].singular)
+	}
+
+	// build pluralRule and singularRule with dictionary for compound words
+	for _, wd := range dictionary {
+		if !wd.exact {
+			InsertPluralRule(wd.singular, wd.plural)
+			if !wd.unidirectional {
+				InsertSingularRule(wd.plural, wd.singular)
+			}
+
+			if wd.alternative != "" {
+				InsertSingularRule(wd.alternative, wd.singular)
+			}
+		}
 	}
 }
