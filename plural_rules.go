@@ -79,6 +79,9 @@ var dictionary = []word{
 	{singular: "medium", plural: "media", alternative: "mediums", unidirectional: true},
 	{singular: "stadium", plural: "stadiums", alternative: "stadia"},
 
+	// uncountables
+	{singular: "money", plural: "money", uncountable: true},
+
 	// exceptions: -f to -ves, not -fe
 	{singular: "dwarf", plural: "dwarfs", alternative: "dwarves"},
 	{singular: "hoof", plural: "hoofs", alternative: "hooves"},
@@ -87,6 +90,10 @@ var dictionary = []word{
 	{singular: "chive", plural: "chives"},
 	{singular: "hive", plural: "hives"},
 	{singular: "move", plural: "moves"},
+
+	// exceptions: instead of -y to -ies
+	{singular: "movie", plural: "movies"},
+	{singular: "cookie", plural: "cookies"},
 }
 
 // singleToPlural is the highest priority map for Pluralize().
@@ -140,7 +147,6 @@ var singleToPlural = map[string]string{
 	"locus":       "loci",
 	"matrix":      "matrices",
 	"minutia":     "minutiae",
-	"money":       "money",
 	"nebula":      "nebulae",
 	"news":        "news",
 	"nucleus":     "nuclei",
@@ -239,6 +245,15 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"rf", "rves"},
 	{"lf", "lves"},
 	{"fe", "ves"}, // previously '[a-eg-km-z]fe' TODO: regex support
+
+	// Words that end in -y preceded by a consonant change -y to -ies
+	{"ay", "ays"},
+	{"ey", "eys"},
+	{"oy", "oys"},
+	{"quy", "quies"},
+	{"uy", "uys"},
+	{"y", "ies"}, // '[^aeiou]y'
+
 	{"campus", "campuses"},
 	{"person", "people"},
 	{"phylum", "phyla"},
@@ -254,7 +269,6 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"louse", "lice"},
 	{"media", "media"},
 	{"mouse", "mice"},
-	{"movie", "movies"},
 	{"oasis", "oasis"},
 	{"atum", "ata"},
 	{"atus", "atuses"},
@@ -284,7 +298,6 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"nna", "nnas"},
 	{"oci", "ocus"},
 	{"ode", "odes"},
-	{"quy", "quies"},
 	{"tum", "ta"},
 	{"tus", "tuses"},
 	{"ula", "ulae"},
@@ -293,33 +306,13 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"use", "uses"},
 	{"uss", "usses"},
 	{"you", "you"},
-	{"by", "bies"},
 	{"ch", "ches"},
-	{"cy", "cies"},
-	{"dy", "dies"},
 	{"ex", "ices"},
-	{"fy", "fies"},
-	{"gy", "gies"},
-	{"hy", "hies"},
 	{"io", "ios"},
-	{"jy", "jies"},
-	{"ky", "kies"},
-	{"ly", "lies"},
-	{"my", "mies"},
-	{"ny", "nies"},
-	{"py", "pies"},
-	{"qy", "qies"},
-	{"ry", "ries"},
 	{"sh", "shes"},
 	{"ss", "sses"},
-	{"sy", "sies"},
-	{"ty", "ties"},
 	{"tz", "tzes"},
 	{"va", "vae"},
-	{"vy", "vies"},
-	{"wy", "wies"},
-	{"xy", "xies"},
-	{"zy", "zies"},
 	{"zz", "zzes"},
 	{"o", "oes"},
 	{"x", "xes"},
