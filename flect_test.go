@@ -244,6 +244,16 @@ var singlePluralAssertions = []dict{
 	{"navy", "navies", true, true},
 	{"proxy", "proxies", true, true},
 	{"crazy", "crazies", true, true},
+
+	// Words from French that end in -u add an x
+	{"aboideau", "aboideaux", true, true},
+	{"beau", "beaux", true, true},
+	{"château", "châteaux", true, true},
+	{"chateau", "chateaux", true, true},
+	{"fabliau", "fabliaux", true, true},
+	{"tableau", "tableaux", true, true},
+	{"bureau", "bureaus", true, true},
+	{"adieu", "adieux", true, true},
 }
 
 func init() {

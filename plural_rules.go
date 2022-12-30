@@ -72,6 +72,11 @@ var dictionary = []word{
 	{singular: "die", plural: "dice"},
 	{singular: "person", plural: "people"},
 
+	// Words from French that end in -u add an x; in addition to eau to eaux rule
+	{singular: "adieu", plural: "adieux", alternative: "adieus"},
+	{singular: "fabliau", plural: "fabliaux"},
+	{singular: "bureau", plural: "bureaus", alternative: "bureaux"}, // popular
+
 	{singular: "base", plural: "bases"}, // popular case
 	{singular: "basis", plural: "bases", unidirectional: true},
 
@@ -111,12 +116,9 @@ var singleToPlural = map[string]string{
 	"axis":        "axes",
 	"bacillus":    "bacilli",
 	"bacterium":   "bacteria",
-	"beau":        "beaus",
-	"bureau":      "bureaus",
 	"bus":         "buses",
 	"campus":      "campuses",
 	"caucus":      "caucuses",
-	"château":     "châteaux",
 	"circus":      "circuses",
 	"codex":       "codices",
 	"concerto":    "concertos",
@@ -178,7 +180,6 @@ var singleToPlural = map[string]string{
 	"symposium":   "symposiums",
 	"synapse":     "synapses",
 	"synopsis":    "synopses",
-	"tableau":     "tableaus",
 	"testis":      "testes",
 	"thesis":      "theses",
 	"tuna":        "tuna",
@@ -253,6 +254,9 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"quy", "quies"},
 	{"uy", "uys"},
 	{"y", "ies"}, // '[^aeiou]y'
+
+	// Words from French that end in -u add an x (eg, château becomes châteaux)
+	{"eau", "eaux"}, // it seems like 'eau' is the most popular form of this rule
 
 	{"campus", "campuses"},
 	{"person", "people"},
