@@ -112,7 +112,6 @@ var singlePluralAssertions = []dict{
 	{"collapse", "collapses", true, true},
 	{"comment", "comments", true, true},
 	{"crisis", "crises", true, true},
-	{"criterion", "criteria", true, true},
 	{"custom_field", "custom_fields", true, true},
 	{"database", "databases", true, true},
 	{"datum", "data", true, true},
@@ -139,7 +138,6 @@ var singlePluralAssertions = []dict{
 	{"horse", "horses", true, true},
 	{"house", "houses", true, true},
 	{"index", "indices", true, true},
-	{"information", "information", true, true},
 	{"jeans", "jeans", true, true},
 	{"lapse", "lapses", true, true},
 	{"lunch", "lunches", true, true},
@@ -153,7 +151,6 @@ var singlePluralAssertions = []dict{
 	{"ovum", "ova", true, true},
 	{"payment_information", "payment_information", true, true},
 	{"pepsi", "pepsis", true, true},
-	{"phenomenon", "phenomena", true, true},
 	{"photo", "photos", true, true},
 	{"piano", "pianos", true, true},
 	{"plus", "pluses", true, true},
@@ -254,6 +251,9 @@ var singlePluralAssertions = []dict{
 	{"tableau", "tableaux", true, true},
 	{"bureau", "bureaus", true, true},
 	{"adieu", "adieux", true, true},
+
+	// Words from Greek that end in -on change -on to -a
+	{"tetrahedron", "tetrahedra", true, true},
 }
 
 func init() {

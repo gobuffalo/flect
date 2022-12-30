@@ -77,6 +77,15 @@ var dictionary = []word{
 	{singular: "fabliau", plural: "fabliaux"},
 	{singular: "bureau", plural: "bureaus", alternative: "bureaux"}, // popular
 
+	// Words from Greek that end in -on change -on to -a; in addition to hedron rule
+	{singular: "criterion", plural: "criteria"},
+	{singular: "ganglion", plural: "ganglia", alternative: "ganglions"},
+	{singular: "lexicon", plural: "lexica", alternative: "lexicons"},
+	{singular: "mitochondrion", plural: "mitochondria", alternative: "mitochondrions"},
+	{singular: "noumenon", plural: "noumena"},
+	{singular: "phenomenon", plural: "phenomena"},
+	{singular: "taxon", plural: "taxa"},
+
 	{singular: "base", plural: "bases"}, // popular case
 	{singular: "basis", plural: "bases", unidirectional: true},
 
@@ -85,6 +94,7 @@ var dictionary = []word{
 	{singular: "stadium", plural: "stadiums", alternative: "stadia"},
 
 	// uncountables
+	{singular: "information", plural: "information", uncountable: true},
 	{singular: "money", plural: "money", uncountable: true},
 
 	// exceptions: -f to -ves, not -fe
@@ -124,7 +134,6 @@ var singleToPlural = map[string]string{
 	"concerto":    "concertos",
 	"corpus":      "corpora",
 	"crisis":      "crises",
-	"criterion":   "criteria",
 	"curriculum":  "curriculums",
 	"datum":       "data",
 	"diagnosis":   "diagnoses",
@@ -142,7 +151,6 @@ var singleToPlural = map[string]string{
 	"halo":        "halos",
 	"hypothesis":  "hypotheses",
 	"index":       "indices",
-	"information": "information",
 	"jeans":       "jeans",
 	"larva":       "larvae",
 	"libretto":    "librettos",
@@ -158,7 +166,6 @@ var singleToPlural = map[string]string{
 	"opus":        "opera",
 	"ovum":        "ova",
 	"parenthesis": "parentheses",
-	"phenomenon":  "phenomena",
 	"photo":       "photos",
 	"phylum":      "phyla",
 	"piano":       "pianos",
@@ -257,6 +264,10 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 
 	// Words from French that end in -u add an x (eg, château becomes châteaux)
 	{"eau", "eaux"}, // it seems like 'eau' is the most popular form of this rule
+
+	// Words from Greek that end in -on change -on to -a (eg, polyhedron becomes polyhedra)
+	// https://en.wiktionary.org/wiki/Category:English_irregular_plurals_ending_in_"-a"
+	{"hedron", "hedra"},
 
 	{"campus", "campuses"},
 	{"person", "people"},
