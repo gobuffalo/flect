@@ -114,7 +114,6 @@ var singlePluralAssertions = []dict{
 	{"crisis", "crises", true, true},
 	{"custom_field", "custom_fields", true, true},
 	{"database", "databases", true, true},
-	{"datum", "data", true, true},
 	{"dear", "dears", true, true},
 	{"device", "devices", true, true},
 	{"diagnosis_a", "diagnosis_as", true, true},
@@ -148,7 +147,6 @@ var singlePluralAssertions = []dict{
 	{"news", "news", true, true},
 	{"newsletter", "newsletters", true, true},
 	{"octopus", "octopi", true, true},
-	{"ovum", "ova", true, true},
 	{"payment_information", "payment_information", true, true},
 	{"pepsi", "pepsis", true, true},
 	{"photo", "photos", true, true},
@@ -168,8 +166,6 @@ var singlePluralAssertions = []dict{
 	{"sportsEquipment", "sportsEquipment", true, true},
 	{"spouse", "spouses", true, true},
 	{"stack", "stacks", true, true},
-	{"stadium", "stadiums", true, true},
-	{"stadium", "stadia", true, false},
 	{"status_code", "status_codes", true, true},
 	{"status", "statuses", true, true},
 	{"Status", "Statuses", true, true},
@@ -254,6 +250,28 @@ var singlePluralAssertions = []dict{
 
 	// Words from Greek that end in -on change -on to -a
 	{"tetrahedron", "tetrahedra", true, true},
+
+	// Words from Latin that end in -um change -um to -a
+	{"stadium", "stadiums", true, true},
+	{"stadium", "stadia", true, false},
+	{"aquarium", "aquaria", true, true},
+	{"auditorium", "auditoria", true, true},
+	{"bacterium", "bacteria", true, true},
+	{"pretorium", "pretoriums", true, true},
+	{"symposium", "symposia", true, true},
+	{"symposium", "symposiums", true, false},
+	{"amoebaeum", "amoebaea", true, true},
+	{"coliseum", "coliseums", true, true},
+	{"museum", "museums", true, true},
+	{"agenda", "agendas", true, true},
+	{"curriculum", "curriculums", true, true},
+	{"collum", "colla", true, true},
+	{"datum", "data", true, true},
+	{"erratum", "errata", true, true},
+	{"maximum", "maxima", true, true},
+	{"platinum", "platinums", true, true},
+	{"serum", "sera", true, true},
+	{"spectrum", "spectra", true, true},
 }
 
 func init() {

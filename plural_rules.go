@@ -86,12 +86,17 @@ var dictionary = []word{
 	{singular: "phenomenon", plural: "phenomena"},
 	{singular: "taxon", plural: "taxa"},
 
-	{singular: "base", plural: "bases"}, // popular case
-	{singular: "basis", plural: "bases", unidirectional: true},
-
+	// Words from Latin that end in -um change -um to -a; in addition to some rules
 	{singular: "media", plural: "media"}, // popular case: media -> media
 	{singular: "medium", plural: "media", alternative: "mediums", unidirectional: true},
 	{singular: "stadium", plural: "stadiums", alternative: "stadia"},
+	{singular: "aquarium", plural: "aquaria", alternative: "aquariums"},
+	{singular: "auditorium", plural: "auditoria", alternative: "auditoriums"},
+	{singular: "symposium", plural: "symposia", alternative: "symposiums"},
+	{singular: "curriculum", plural: "curriculums", alternative: "curricula"}, // ulum
+
+	{singular: "base", plural: "bases"}, // popular case
+	{singular: "basis", plural: "bases", unidirectional: true},
 
 	// uncountables
 	{singular: "information", plural: "information", uncountable: true},
@@ -109,6 +114,11 @@ var dictionary = []word{
 	// exceptions: instead of -y to -ies
 	{singular: "movie", plural: "movies"},
 	{singular: "cookie", plural: "cookies"},
+
+	// exceptions: instead of -um to -a
+	{singular: "pretorium", plural: "pretoriums"},
+	{singular: "agenda", plural: "agendas"}, // instead of plural of agendum
+	// exceptions: instead of -um to -a (chemical element names)
 }
 
 // singleToPlural is the highest priority map for Pluralize().
@@ -125,7 +135,6 @@ var singleToPlural = map[string]string{
 	"appendix":    "appendices",
 	"axis":        "axes",
 	"bacillus":    "bacilli",
-	"bacterium":   "bacteria",
 	"bus":         "buses",
 	"campus":      "campuses",
 	"caucus":      "caucuses",
@@ -134,12 +143,9 @@ var singleToPlural = map[string]string{
 	"concerto":    "concertos",
 	"corpus":      "corpora",
 	"crisis":      "crises",
-	"curriculum":  "curriculums",
-	"datum":       "data",
 	"diagnosis":   "diagnoses",
 	"ellipsis":    "ellipses",
 	"equipment":   "equipment",
-	"erratum":     "errata",
 	"fez":         "fezzes",
 	"focus":       "foci",
 	"foo":         "foos",
@@ -164,10 +170,8 @@ var singleToPlural = map[string]string{
 	"octopus":     "octopi",
 	"offspring":   "offspring",
 	"opus":        "opera",
-	"ovum":        "ova",
 	"parenthesis": "parentheses",
 	"photo":       "photos",
-	"phylum":      "phyla",
 	"piano":       "pianos",
 	"plus":        "pluses",
 	"prognosis":   "prognoses",
@@ -175,16 +179,13 @@ var singleToPlural = map[string]string{
 	"quiz":        "quizzes",
 	"quota":       "quotas",
 	"radius":      "radiuses",
-	"referendum":  "referendums",
 	"ress":        "resses",
 	"rice":        "rice",
 	"sex":         "sexes",
 	"shoe":        "shoes",
 	"stimulus":    "stimuli",
-	"stratum":     "strata",
 	"swine":       "swine",
 	"syllabus":    "syllabi",
-	"symposium":   "symposiums",
 	"synapse":     "synapses",
 	"synopsis":    "synopses",
 	"testis":      "testes",
@@ -269,12 +270,40 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	// https://en.wiktionary.org/wiki/Category:English_irregular_plurals_ending_in_"-a"
 	{"hedron", "hedra"},
 
+	// Words from Latin that end in -um change -um to -a (eg, minimum becomes minima)
+	// https://en.wiktionary.org/wiki/Category:English_irregular_plurals_ending_in_"-a"
+	{"ium", "ia"}, // some exceptions especially chemical element names
+	{"seum", "seums"},
+	{"eum", "ea"},
+	{"oum", "oa"},
+	{"stracum", "straca"},
+	{"dum", "da"},
+	{"elum", "ela"},
+	{"ilum", "ila"},
+	{"olum", "ola"},
+	{"ulum", "ula"},
+	{"llum", "lla"},
+	{"ylum", "yla"},
+	{"imum", "ima"},
+	{"ernum", "erna"},
+	{"gnum", "gna"},
+	{"brum", "bra"},
+	{"crum", "cra"},
+	{"erum", "era"},
+	{"trum", "tra"},
+	{"antum", "anta"},
+	{"atum", "ata"},
+	{"entum", "enta"},
+	{"etum", "eta"},
+	{"itum", "ita"},
+	{"otum", "ota"},
+	{"utum", "uta"},
+	{"ctum", "cta"},
+	{"ovum", "ova"},
+
 	{"campus", "campuses"},
 	{"person", "people"},
-	{"phylum", "phyla"},
-	{"randum", "randa"},
 	{"actus", "acti"},
-	{"adium", "adia"},
 	{"basis", "basis"},
 	{"child", "children"},
 	{"focus", "foci"},
@@ -282,14 +311,11 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"hello", "hellos"},
 	{"jeans", "jeans"},
 	{"louse", "lice"},
-	{"media", "media"},
 	{"mouse", "mice"},
 	{"oasis", "oasis"},
-	{"atum", "ata"},
 	{"atus", "atuses"},
 	{"base", "bases"},
 	{"cess", "cesses"},
-	{"dium", "diums"},
 	{"eses", "esis"},
 	{"iano", "ianos"},
 	{"irus", "iri"},
@@ -300,20 +326,17 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"odex", "odice"},
 	{"oose", "eese"},
 	{"ouse", "ouses"},
-	{"ovum", "ova"},
 	{"shoe", "shoes"},
 	{"stis", "stes"},
 	{"vice", "vices"},
 	{"box", "boxes"},
 	{"dge", "dges"},
 	{"itz", "itzes"},
-	{"ium", "ia"},
 	{"ize", "izes"},
 	{"man", "men"},
 	{"nna", "nnas"},
 	{"oci", "ocus"},
 	{"ode", "odes"},
-	{"tum", "ta"},
 	{"tus", "tuses"},
 	{"ula", "ulae"},
 	{"ula", "ulas"},
