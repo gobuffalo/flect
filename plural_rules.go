@@ -225,6 +225,15 @@ func init() {
 		if singleToPlural[wd.singular] != "" {
 			panic(fmt.Errorf("map singleToPlural already has an entry for %s", wd.singular))
 		}
+
+		if wd.uncountable && wd.plural == "" {
+			wd.plural = wd.singular
+		}
+
+		if wd.plural == "" {
+			panic(fmt.Errorf("plural for %s is not provided", wd.singular))
+		}
+
 		singleToPlural[wd.singular] = wd.plural
 
 		if !wd.unidirectional {
@@ -232,13 +241,13 @@ func init() {
 				panic(fmt.Errorf("map pluralToSingle already has an entry for %s", wd.plural))
 			}
 			pluralToSingle[wd.plural] = wd.singular
-		}
 
-		if wd.alternative != "" {
-			if pluralToSingle[wd.alternative] != "" {
-				panic(fmt.Errorf("map pluralToSingle already has an entry for %s", wd.alternative))
+			if wd.alternative != "" {
+				if pluralToSingle[wd.alternative] != "" {
+					panic(fmt.Errorf("map pluralToSingle already has an entry for %s", wd.alternative))
+				}
+				pluralToSingle[wd.alternative] = wd.singular
 			}
-			pluralToSingle[wd.alternative] = wd.singular
 		}
 	}
 }
@@ -248,6 +257,11 @@ type singularToPluralSuffix struct {
 	plural   string
 }
 
+// singularToPluralSuffixList is a list of "bidirectional" suffix rules for
+// the irregular plurals follow such rules.
+//
+// NOTE: IMPORTANT! The order of items in this list is the rule priority, not
+// alphabet order. The first match will be used to inflect.
 var singularToPluralSuffixList = []singularToPluralSuffix{
 	// https://en.wiktionary.org/wiki/Appendix:English_irregular_nouns#Rules
 	// Words that end in -f or -fe change -f or -fe to -ves
@@ -365,11 +379,18 @@ func init() {
 
 	// build pluralRule and singularRule with dictionary for compound words
 	for _, wd := range dictionary {
-		if !wd.exact {
-			InsertPluralRule(wd.singular, wd.plural)
-			if !wd.unidirectional {
-				InsertSingularRule(wd.plural, wd.singular)
-			}
+		if wd.exact {
+			continue
+		}
+
+		if wd.uncountable && wd.plural == "" {
+			wd.plural = wd.singular
+		}
+
+		InsertPluralRule(wd.singular, wd.plural)
+
+		if !wd.unidirectional {
+			InsertSingularRule(wd.plural, wd.singular)
 
 			if wd.alternative != "" {
 				InsertSingularRule(wd.alternative, wd.singular)

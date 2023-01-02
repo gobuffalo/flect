@@ -280,6 +280,10 @@ var singlePluralAssertions = []dict{
 
 func init() {
 	for _, wd := range dictionary {
+		if wd.uncountable && wd.plural == "" {
+			wd.plural = wd.singular
+		}
+
 		singlePluralAssertions = append(singlePluralAssertions, dict{
 			singular:          wd.singular,
 			plural:            wd.plural,
