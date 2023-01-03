@@ -112,6 +112,17 @@ var dictionary = []word{
 	{singular: "corpus", plural: "corpora", alternative: "corpuses"}, // -ra
 	{singular: "genus", plural: "genera"},
 
+	// Words from Latin that end in -a change -a to -ae
+	{singular: "alumna", plural: "alumnae"},
+	{singular: "vertebra", plural: "vertebrae"},
+	{singular: "differentia", plural: "differentiae"}, // -tia
+	{singular: "minutia", plural: "minutiae"},
+	{singular: "vita", plural: "vitae"},   // -ita
+	{singular: "larva", plural: "larvae"}, // -va
+	{singular: "postcava", plural: "postcavae"},
+	{singular: "praecava", plural: "praecavae"},
+	{singular: "uva", plural: "uvae"},
+
 	{singular: "base", plural: "bases"}, // popular case
 	{singular: "basis", plural: "bases", unidirectional: true},
 
@@ -152,6 +163,9 @@ var dictionary = []word{
 	{singular: "pretorium", plural: "pretoriums"},
 	{singular: "agenda", plural: "agendas"}, // instead of plural of agendum
 	// exceptions: instead of -um to -a (chemical element names)
+
+	// Words from Latin that end in -a change -a to -ae
+	{singular: "formula", plural: "formulas", alternative: "formulae"}, // also -um/-a
 }
 
 // singleToPlural is the highest priority map for Pluralize().
@@ -159,7 +173,6 @@ var dictionary = []word{
 // compound words.
 var singleToPlural = map[string]string{
 	"alias":       "aliases",
-	"alumna":      "alumnae",
 	"analysis":    "analyses",
 	"antenna":     "antennas",
 	"antithesis":  "antitheses",
@@ -173,16 +186,12 @@ var singleToPlural = map[string]string{
 	"ellipsis":    "ellipses",
 	"fez":         "fezzes",
 	"foo":         "foos",
-	"formula":     "formulas",
 	"graffito":    "graffiti",
 	"halo":        "halos",
 	"hypothesis":  "hypotheses",
 	"index":       "indices",
-	"larva":       "larvae",
 	"libretto":    "librettos",
 	"matrix":      "matrices",
-	"minutia":     "minutiae",
-	"nebula":      "nebulae",
 	"oasis":       "oases",
 	"offspring":   "offspring",
 	"parenthesis": "parentheses",
@@ -199,9 +208,7 @@ var singleToPlural = map[string]string{
 	"testis":      "testes",
 	"thesis":      "theses",
 	"vedalia":     "vedalias",
-	"vertebra":    "vertebrae",
 	"vertix":      "vertices",
-	"vita":        "vitae",
 	"vortex":      "vortices",
 }
 
@@ -286,6 +293,13 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	// Words from French that end in -u add an x (eg, château becomes châteaux)
 	{"eau", "eaux"}, // it seems like 'eau' is the most popular form of this rule
 
+	// Words from Latin that end in -a change -a to -ae; before -on to -a and -um to -a
+	{"bula", "bulae"},
+	{"dula", "bulae"},
+	{"lula", "bulae"},
+	{"nula", "bulae"},
+	{"vula", "bulae"},
+
 	// Words from Greek that end in -on change -on to -a (eg, polyhedron becomes polyhedra)
 	// https://en.wiktionary.org/wiki/Category:English_irregular_plurals_ending_in_"-a"
 	{"hedron", "hedra"},
@@ -348,8 +362,6 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"nna", "nnas"},
 	{"oci", "ocus"},
 	{"ode", "odes"},
-	{"ula", "ulae"},
-	{"ula", "ulas"},
 	{"uli", "ulus"},
 	{"uss", "usses"},
 	{"ch", "ches"},
@@ -358,7 +370,6 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"sh", "shes"},
 	{"ss", "sses"},
 	{"tz", "tzes"},
-	{"va", "vae"},
 	{"zz", "zzes"},
 	{"o", "oes"},
 	{"x", "xes"},

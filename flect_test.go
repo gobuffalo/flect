@@ -136,7 +136,6 @@ var singlePluralAssertions = []dict{
 	{"lunch", "lunches", true, true},
 	{"marsh", "marshes", true, true},
 	{"matrix", "matrices", true, true},
-	{"multimedia", "multimedia", true, true},
 	{"mouse", "mice", true, true},
 	{"news", "news", true, true},
 	{"newsletter", "newsletters", true, true},
@@ -164,7 +163,6 @@ var singlePluralAssertions = []dict{
 	{"truss", "trusses", true, true},
 	{"user", "users", true, true},
 	{"user_custom_field", "user_custom_fields", true, true},
-	{"vedalia", "vedalias", true, true},
 	{"wish", "wishes", true, true},
 	{"woman", "women", true, true},
 	{"human", "humans", true, true},
@@ -262,6 +260,21 @@ var singlePluralAssertions = []dict{
 
 	// Words from Latin that end in -us change -us to -i or -era
 	{"opera", "operas", true, true},
+
+	// Words from Latin that end in -a change -a to -ae
+	{"alumna", "alumnae", true, true},
+	{"larva", "larvae", true, true},
+	{"minutia", "minutiae", true, true},
+	{"nebula", "nebulae", true, true},
+	{"vertebra", "vertebrae", true, true},
+	{"vita", "vitae", true, true},
+	{"antenna", "antennas", true, true},
+	{"formula", "formulas", true, true},
+	{"tuna", "tuna", true, true},
+	{"quota", "quotas", true, true},
+	{"vedalia", "vedalias", true, true},
+	{"media", "media", true, true}, // instead of mediae, popular case
+	{"multimedia", "multimedia", true, true},
 
 	// Words that end in -ch, -o, -s, -sh, -x, -z
 	{"bus", "buses", true, true}, // end with u + s, but no -us rule
