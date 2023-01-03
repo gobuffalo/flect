@@ -67,12 +67,12 @@ var dictionary = []word{
 	{singular: "goose", plural: "geese"},
 	{singular: "man", plural: "men"},
 	{singular: "human", plural: "humans"}, // not humen
-	{singular: "louse", plural: "lice"},
+	{singular: "louse", plural: "lice", exact: true},
 	{singular: "mouse", plural: "mice"},
 	{singular: "tooth", plural: "teeth"},
 	{singular: "woman", plural: "women"},
 	// misc https://en.wikipedia.org/wiki/English_plurals#Miscellaneous_irregular_plurals
-	{singular: "die", plural: "dice"},
+	{singular: "die", plural: "dice", exact: true},
 	{singular: "person", plural: "people"},
 
 	// Words from French that end in -u add an x; in addition to eau to eaux rule
@@ -122,6 +122,19 @@ var dictionary = []word{
 	{singular: "postcava", plural: "postcavae"},
 	{singular: "praecava", plural: "praecavae"},
 	{singular: "uva", plural: "uvae"},
+
+	// Words from Latin that end in -ex change -ex to -ices
+	{singular: "apex", plural: "apices", alternative: "apexes"},
+	{singular: "codex", plural: "codices", alternative: "codexes"},
+	{singular: "index", plural: "indices", alternative: "indexes"},
+	{singular: "latex", plural: "latices", alternative: "latexes"},
+	{singular: "vertex", plural: "vertices", alternative: "vertexes"},
+	{singular: "vortex", plural: "vortices", alternative: "vortexes"},
+
+	// Words from Latin that end in -ix change -ix to -ices (eg, matrix becomes matrices)
+	{singular: "appendix", plural: "appendices", alternative: "appendixes"},
+	{singular: "radix", plural: "radices", alternative: "radixes"},
+	{singular: "helix", plural: "helices", alternative: "helixes"},
 
 	{singular: "base", plural: "bases"}, // popular case
 	{singular: "basis", plural: "bases", unidirectional: true},
@@ -176,10 +189,7 @@ var singleToPlural = map[string]string{
 	"analysis":    "analyses",
 	"antenna":     "antennas",
 	"antithesis":  "antitheses",
-	"apex":        "apexes",
-	"appendix":    "appendices",
 	"axis":        "axes",
-	"codex":       "codices",
 	"concerto":    "concertos",
 	"crisis":      "crises",
 	"diagnosis":   "diagnoses",
@@ -189,9 +199,7 @@ var singleToPlural = map[string]string{
 	"graffito":    "graffiti",
 	"halo":        "halos",
 	"hypothesis":  "hypotheses",
-	"index":       "indices",
 	"libretto":    "librettos",
-	"matrix":      "matrices",
 	"oasis":       "oases",
 	"offspring":   "offspring",
 	"parenthesis": "parentheses",
@@ -201,15 +209,12 @@ var singleToPlural = map[string]string{
 	"quiz":        "quizzes",
 	"quota":       "quotas",
 	"ress":        "resses",
-	"sex":         "sexes",
 	"shoe":        "shoes",
 	"synapse":     "synapses",
 	"synopsis":    "synopses",
 	"testis":      "testes",
 	"thesis":      "theses",
 	"vedalia":     "vedalias",
-	"vertix":      "vertices",
-	"vortex":      "vortices",
 }
 
 // pluralToSingle is the highest priority map for Singularize().
@@ -339,6 +344,12 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	// Words from Latin that end in -us change -us to -i or -era
 	// not easy to make a simple rule. just add them all to the dictionary
 
+	// Words from Latin that end in -ex change -ex to -ices (eg, vortex becomes vortices)
+	// Words from Latin that end in -ix change -ix to -ices (eg, matrix becomes matrices)
+	//    for example, -dix, -dex, and -dice will have the same plural form so
+	//    making a simple rule is not possible for them
+	{"trix", "trices"}, // ignore a few words end in trice
+
 	// Words that end in -ch, -o, -s, -sh, -x, -z
 	{"ouse", "ouses"},
 	{"lause", "lauses"},
@@ -350,11 +361,9 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"eses", "esis"},
 	{"iano", "ianos"},
 	{"isis", "ises"},
-	{"odex", "odice"},
 	{"oose", "eese"},
 	{"shoe", "shoes"},
 	{"stis", "stes"},
-	{"vice", "vices"},
 	{"dge", "dges"},
 	{"itz", "itzes"},
 	{"ize", "izes"},
@@ -365,7 +374,6 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"uli", "ulus"},
 	{"uss", "usses"},
 	{"ch", "ches"},
-	{"ex", "ices"},
 	{"io", "ios"},
 	{"sh", "shes"},
 	{"ss", "sses"},

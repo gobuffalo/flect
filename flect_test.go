@@ -112,7 +112,6 @@ var singlePluralAssertions = []dict{
 	{"custom_field", "custom_fields", true, true},
 	{"database", "databases", true, true},
 	{"dear", "dears", true, true},
-	{"device", "devices", true, true},
 	{"diagnosis_a", "diagnosis_as", true, true},
 	{"diagnosis", "diagnoses", true, true},
 	{"eclipse", "eclipses", true, true},
@@ -122,7 +121,6 @@ var singlePluralAssertions = []dict{
 	{"experience", "experiences", true, true},
 	{"fez", "fezzes", true, true},
 	{"field", "fields", true, true},
-	{"fix", "fixes", true, true},
 	{"fleet", "fleets", true, true},
 	{"foobar", "foobars", true, true},
 	{"fox", "foxes", true, true},
@@ -130,12 +128,10 @@ var singlePluralAssertions = []dict{
 	{"glimpse", "glimpses", true, true},
 	{"halo", "halos", true, true},
 	{"horse", "horses", true, true},
-	{"index", "indices", true, true},
 	{"jeans", "jeans", true, true},
 	{"lapse", "lapses", true, true},
 	{"lunch", "lunches", true, true},
 	{"marsh", "marshes", true, true},
-	{"matrix", "matrices", true, true},
 	{"mouse", "mice", true, true},
 	{"news", "news", true, true},
 	{"newsletter", "newsletters", true, true},
@@ -151,7 +147,6 @@ var singlePluralAssertions = []dict{
 	{"quiz", "quizzes", true, true},
 	{"rice", "rice", true, true},
 	{"search", "searches", true, true},
-	{"service", "services", true, true},
 	{"shoe", "shoes", true, true},
 	{"sportsEquipment", "sportsEquipment", true, true},
 	{"stack", "stacks", true, true},
@@ -289,6 +284,28 @@ var singlePluralAssertions = []dict{
 	{"fuse", "fuses", true, true},
 	{"house", "houses", true, true},
 	{"spouse", "spouses", true, true},
+
+	// Words from Latin that end in -ex change -ex to -ices
+	// Words from Latin that end in -ix change -ix to -ices
+	{"appendix", "appendices", true, true}, // -dix
+	{"codex", "codices", true, true},       // -dex
+	{"index", "indices", true, true},
+	{"bodice", "bodices", true, true},    // -dice
+	{"helix", "helices", true, true},     // -lix
+	{"complex", "complexes", true, true}, // -lex
+	{"duplex", "duplexes", true, true},
+	{"accomplice", "accomplices", true, true}, // -lice
+	{"slice", "slices", true, true},
+	{"matrix", "matrices", true, true},  // -trix
+	{"justice", "justices", true, true}, // -tice
+	{"lattice", "lattices", true, true},
+	{"notice", "notices", true, true},
+	{"apex", "apices", true, true},    // -pex
+	{"spice", "spices", true, true},   // -pice
+	{"device", "devices", true, true}, // -vice
+	{"service", "services", true, true},
+	{"fix", "fixes", true, true}, // -ix
+	{"sex", "sexes", true, true}, // -ex
 }
 
 func init() {
