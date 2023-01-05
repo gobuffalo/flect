@@ -94,34 +94,27 @@ var singlePluralAssertions = []dict{
 	{"SmartPerson", "SmartPeople", true, true},
 	{"great_person", "great_people", true, true},
 	{"salesperson", "salespeople", true, true},
+	{"custom_field", "custom_fields", true, true},
+	{"funky jeans", "funky jeans", true, true},
+	{"payment_information", "payment_information", true, true},
+	{"sportsEquipment", "sportsEquipment", true, true},
+	{"status_code", "status_codes", true, true},
+	{"user_custom_field", "user_custom_fields", true, true},
 	{"SuperbOx", "SuperbOxen", true, true},
 	{"WildOx", "WildOxen", true, true},
 	{"wild_ox", "wild_oxen", true, true},
 	{"box", "boxes", true, true},
-	{"cat", "cats", true, true},
+	{"fox", "foxes", true, true},
 	{"comment", "comments", true, true},
-	{"custom_field", "custom_fields", true, true},
-	{"dear", "dears", true, true},
-	{"diagnosis_a", "diagnosis_as", true, true},
 	{"edge", "edges", true, true},
 	{"equipment", "equipment", true, true},
 	{"experience", "experiences", true, true},
-	{"field", "fields", true, true},
 	{"fleet", "fleets", true, true},
 	{"foobar", "foobars", true, true},
-	{"fox", "foxes", true, true},
-	{"funky jeans", "funky jeans", true, true},
-	{"jeans", "jeans", true, true},
 	{"mouse", "mice", true, true},
-	{"news", "news", true, true},
 	{"newsletter", "newsletters", true, true},
-	{"payment_information", "payment_information", true, true},
-	{"rice", "rice", true, true},
-	{"sportsEquipment", "sportsEquipment", true, true},
 	{"stack", "stacks", true, true},
-	{"status_code", "status_codes", true, true},
 	{"user", "users", true, true},
-	{"user_custom_field", "user_custom_fields", true, true},
 	{"woman", "women", true, true},
 	{"human", "humans", true, true},
 	{"spokesman", "spokesmen", true, true},
@@ -304,8 +297,11 @@ var singlePluralAssertions = []dict{
 	{"spice", "spices", true, true},   // -pice
 	{"device", "devices", true, true}, // -vice
 	{"service", "services", true, true},
-	{"fix", "fixes", true, true}, // -ix
-	{"sex", "sexes", true, true}, // -ex
+	{"fix", "fixes", true, true},        // -ix
+	{"sex", "sexes", true, true},        // -ex
+	{"invoice", "invoices", true, true}, // gobuffalo/flect#61
+	{"voice", "voices", true, true},
+	{"choice", "choices", true, true},
 
 	// Words from Latin that end in -is change -is to -es
 	{"axis", "axes", true, true},

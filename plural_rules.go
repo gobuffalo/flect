@@ -97,6 +97,7 @@ var dictionary = []word{
 	{singular: "auditorium", plural: "auditoria", alternative: "auditoriums"},
 	{singular: "symposium", plural: "symposia", alternative: "symposiums"},
 	{singular: "curriculum", plural: "curriculums", alternative: "curricula"}, // ulum
+	{singular: "quota", plural: "quotas"},
 
 	// Words from Latin that end in -us change -us to -i or -era
 	{singular: "alumnus", plural: "alumni", alternative: "alumnuses"}, // -i
@@ -206,25 +207,7 @@ var dictionary = []word{
 // singleToPlural is the highest priority map for Pluralize().
 // singularToPluralSuffixList is used to build pluralRules for suffixes and
 // compound words.
-var singleToPlural = map[string]string{
-	"alias":       "aliases",
-	"antenna":     "antennas",
-	"concerto":    "concertos",
-	"fez":         "fezzes",
-	"foo":         "foos",
-	"graffito":    "graffiti",
-	"halo":        "halos",
-	"libretto":    "librettos",
-	"offspring":   "offspring",
-	"photo":       "photos",
-	"piano":       "pianos",
-	"quiz":        "quizzes",
-	"quota":       "quotas",
-	"ress":        "resses",
-	"shoe":        "shoes",
-	"synapse":     "synapses",
-	"vedalia":     "vedalias",
-}
+var singleToPlural = map[string]string{}
 
 // pluralToSingle is the highest priority map for Singularize().
 // singularToPluralSuffixList is used to build singularRules for suffixes and
@@ -233,12 +216,6 @@ var pluralToSingle = map[string]string{}
 
 // NOTE: This map should not be built as reverse map of singleToPlural since
 // there are words that has the same plurals.
-func init() {
-	// FIXME: remove when the data fully migrated to dictionary.
-	for k, v := range singleToPlural {
-		pluralToSingle[v] = k
-	}
-}
 
 // build singleToPlural and pluralToSingle with dictionary
 func init() {
