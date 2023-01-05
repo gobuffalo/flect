@@ -136,8 +136,19 @@ var dictionary = []word{
 	{singular: "radix", plural: "radices", alternative: "radixes"},
 	{singular: "helix", plural: "helices", alternative: "helixes"},
 
+	// Words from Latin that end in -is change -is to -es
+	{singular: "axis", plural: "axes", exact: true},
+	{singular: "crisis", plural: "crises"},
+	{singular: "ellipsis", plural: "ellipses", unidirectional: true}, // ellipse
+	{singular: "genesis", plural: "geneses"},
+	{singular: "oasis", plural: "oases"},
+	{singular: "thesis", plural: "theses"},
+	{singular: "testis", plural: "testes"},
 	{singular: "base", plural: "bases"}, // popular case
 	{singular: "basis", plural: "bases", unidirectional: true},
+
+	{singular: "alias", plural: "aliases", exact: true}, // no alia, no aliasis
+	{singular: "vedalia", plural: "vedalias"},           // no vedalium, no vedaliases
 
 	// Words that end in -ch, -o, -s, -sh, -x, -z (can be conflict with the others)
 	{singular: "use", plural: "uses", exact: true}, // us vs use
@@ -151,6 +162,7 @@ var dictionary = []word{
 	{singular: "misuse", plural: "misuses"},
 	{singular: "muse", plural: "muses"},
 	{singular: "pause", plural: "pauses"},
+
 	// uncountables
 	{singular: "equipment", uncountable: true},
 	{singular: "information", uncountable: true},
@@ -186,34 +198,21 @@ var dictionary = []word{
 // compound words.
 var singleToPlural = map[string]string{
 	"alias":       "aliases",
-	"analysis":    "analyses",
 	"antenna":     "antennas",
-	"antithesis":  "antitheses",
-	"axis":        "axes",
 	"concerto":    "concertos",
-	"crisis":      "crises",
-	"diagnosis":   "diagnoses",
-	"ellipsis":    "ellipses",
 	"fez":         "fezzes",
 	"foo":         "foos",
 	"graffito":    "graffiti",
 	"halo":        "halos",
-	"hypothesis":  "hypotheses",
 	"libretto":    "librettos",
-	"oasis":       "oases",
 	"offspring":   "offspring",
-	"parenthesis": "parentheses",
 	"photo":       "photos",
 	"piano":       "pianos",
-	"prognosis":   "prognoses",
 	"quiz":        "quizzes",
 	"quota":       "quotas",
 	"ress":        "resses",
 	"shoe":        "shoes",
 	"synapse":     "synapses",
-	"synopsis":    "synopses",
-	"testis":      "testes",
-	"thesis":      "theses",
 	"vedalia":     "vedalias",
 }
 
@@ -350,20 +349,27 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	//    making a simple rule is not possible for them
 	{"trix", "trices"}, // ignore a few words end in trice
 
+	// Words from Latin that end in -is change -is to -es (eg, thesis becomes theses)
+	// -sis and -se has the same plural -ses so making a rule is not easy too.
+	{"iasis", "iases"},
+	{"mesis", "meses"},
+	{"kinesis", "kineses"},
+	{"resis", "reses"},
+	{"gnosis", "gnoses"}, // e.g. diagnosis
+	{"opsis", "opses"},   // e.g. synopsis
+	{"ysis", "yses"},     // e.g. analysis
+
 	// Words that end in -ch, -o, -s, -sh, -x, -z
 	{"ouse", "ouses"},
 	{"lause", "lauses"},
 	{"us", "uses"}, // use/uses is in the dictionary
 
 	{"hello", "hellos"},
-	{"oasis", "oasis"},
 	{"cess", "cesses"},
 	{"eses", "esis"},
 	{"iano", "ianos"},
-	{"isis", "ises"},
 	{"oose", "eese"},
 	{"shoe", "shoes"},
-	{"stis", "stes"},
 	{"dge", "dges"},
 	{"itz", "itzes"},
 	{"ize", "izes"},

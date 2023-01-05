@@ -98,9 +98,6 @@ var singlePluralAssertions = []dict{
 	{"WildOx", "WildOxen", true, true},
 	{"wild_ox", "wild_oxen", true, true},
 	{"address", "addresses", true, true},
-	{"alias", "aliases", true, true},
-	{"analysis", "analyses", true, true},
-	{"axis", "axes", true, true},
 	{"blitz", "blitzes", true, true},
 	{"box", "boxes", true, true},
 	{"buffalo", "buffaloes", true, true},
@@ -108,15 +105,11 @@ var singlePluralAssertions = []dict{
 	{"cat", "cats", true, true},
 	{"collapse", "collapses", true, true},
 	{"comment", "comments", true, true},
-	{"crisis", "crises", true, true},
 	{"custom_field", "custom_fields", true, true},
 	{"database", "databases", true, true},
 	{"dear", "dears", true, true},
 	{"diagnosis_a", "diagnosis_as", true, true},
-	{"diagnosis", "diagnoses", true, true},
-	{"eclipse", "eclipses", true, true},
 	{"edge", "edges", true, true},
-	{"ellipsis", "ellipses", true, true},
 	{"equipment", "equipment", true, true},
 	{"experience", "experiences", true, true},
 	{"fez", "fezzes", true, true},
@@ -136,14 +129,12 @@ var singlePluralAssertions = []dict{
 	{"news", "news", true, true},
 	{"newsletter", "newsletters", true, true},
 	{"payment_information", "payment_information", true, true},
-	{"pepsi", "pepsis", true, true},
 	{"photo", "photos", true, true},
 	{"piano", "pianos", true, true},
 	{"portfolio", "portfolios", true, true},
 	{"potato", "potatoes", true, true},
 	{"prize", "prizes", true, true},
 	{"process", "processes", true, true},
-	{"psi", "psis", true, true},
 	{"quiz", "quizzes", true, true},
 	{"rice", "rice", true, true},
 	{"search", "searches", true, true},
@@ -152,8 +143,6 @@ var singlePluralAssertions = []dict{
 	{"stack", "stacks", true, true},
 	{"status_code", "status_codes", true, true},
 	{"switch", "switches", true, true},
-	{"tax", "taxes", true, true},
-	{"testis", "testes", true, true},
 	{"tomato", "tomatoes", true, true},
 	{"truss", "trusses", true, true},
 	{"user", "users", true, true},
@@ -306,6 +295,26 @@ var singlePluralAssertions = []dict{
 	{"service", "services", true, true},
 	{"fix", "fixes", true, true}, // -ix
 	{"sex", "sexes", true, true}, // -ex
+
+	// Words from Latin that end in -is change -is to -es
+	{"axis", "axes", true, true},
+	{"tax", "taxes", true, true}, // not taxis
+	{"eclipse", "eclipses", true, true},
+	{"ellipse", "ellipses", true, true},
+	{"ellipsis", "ellipses", false, true}, // pluralize only
+	{"oasis", "oases", true, true},
+	{"thesis", "theses", true, true}, // word thesis
+	{"hypothesis", "hypotheses", true, true},
+	{"parenthesis", "parentheses", true, true},
+	{"analysis", "analyses", true, true}, // suffix lysis
+	{"antithesis", "antitheses", true, true},
+	{"diagnosis", "diagnoses", true, true}, // suffix gnosis
+	{"prognosis", "prognoses", true, true},
+	{"synopsis", "synopses", true, true}, // suffix opsis
+	{"synapse", "synapses", true, true},
+	{"waste", "wastes", true, true},
+	{"psi", "psis", true, true},
+	{"pepsi", "pepsis", true, true},
 }
 
 func init() {
