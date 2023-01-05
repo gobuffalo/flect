@@ -162,6 +162,11 @@ var dictionary = []word{
 	{singular: "misuse", plural: "misuses"},
 	{singular: "muse", plural: "muses"},
 	{singular: "pause", plural: "pauses"},
+	{singular: "ache", plural: "aches"},
+	{singular: "topaz", plural: "topazes"},
+	{singular: "buffalo", plural: "buffaloes", alternative: "buffalos"},
+	{singular: "potato", plural: "potatoes"},
+	{singular: "tomato", plural: "tomatoes"},
 
 	// uncountables
 	{singular: "equipment", uncountable: true},
@@ -191,6 +196,11 @@ var dictionary = []word{
 
 	// Words from Latin that end in -a change -a to -ae
 	{singular: "formula", plural: "formulas", alternative: "formulae"}, // also -um/-a
+
+	// exceptions: instead of -o to -oes
+	{singular: "shoe", plural: "shoes"},
+	{singular: "toe", plural: "toes", exact: true},
+	{singular: "graffiti", plural: "graffiti"},
 }
 
 // singleToPlural is the highest priority map for Pluralize().
@@ -364,29 +374,35 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"lause", "lauses"},
 	{"us", "uses"}, // use/uses is in the dictionary
 
-	{"hello", "hellos"},
-	{"cess", "cesses"},
-	{"eses", "esis"},
-	{"iano", "ianos"},
-	{"oose", "eese"},
-	{"shoe", "shoes"},
-	{"dge", "dges"},
-	{"itz", "itzes"},
-	{"ize", "izes"},
-	{"man", "men"},
-	{"nna", "nnas"},
-	{"oci", "ocus"},
-	{"ode", "odes"},
-	{"uli", "ulus"},
-	{"uss", "usses"},
 	{"ch", "ches"},
 	{"io", "ios"},
 	{"sh", "shes"},
 	{"ss", "sses"},
+	{"ez", "ezzes"},
+	{"iz", "izzes"},
 	{"tz", "tzes"},
 	{"zz", "zzes"},
+	{"ano", "anos"},
+	{"lo", "los"},
+	{"to", "tos"},
+	{"oo", "oos"},
 	{"o", "oes"},
 	{"x", "xes"},
+
+	// excluded rules: seems rare
+	// Words from Hebrew that add -im or -ot (eg, cherub becomes cherubim)
+	// - cherub (cherubs or cherubim), seraph (seraphs or seraphim)
+	// Words from Greek that end in -ma change -ma to -mata
+	// - The most of words end in -ma are in this category but it looks like
+	//   just adding -s is more popular.
+	// Words from Latin that end in -nx change -nx to -nges
+	// - The most of words end in -nx are in this category but it looks like
+	//   just adding -es is more popular. (sphinxes)
+
+	// excluded rules: don't care at least for now:
+	// Words that end in -ful that add an s after the -ful
+	// Words that end in -s or -ese denoting a national of a particular country
+	// Symbols or letters, which often add -'s
 }
 
 func init() {
