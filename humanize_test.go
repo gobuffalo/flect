@@ -9,7 +9,10 @@ import (
 func Test_Humanize(t *testing.T) {
 	table := []tt{
 		{"", ""},
+		{"id", "ID"},
+		{"url", "URL"},
 		{"IBM", "IBM"},
+		{"CAUTION! CAPs are CAPs!", "CAUTION! CAPs are CAPs!"},
 		{"employee_mobile_number", "Employee mobile number"},
 		{"employee_salary", "Employee salary"},
 		{"employee_id", "Employee ID"},

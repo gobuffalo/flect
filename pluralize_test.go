@@ -39,3 +39,14 @@ func Test_PluralizeWithSize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkPluralize(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		for _, tt := range singlePluralAssertions {
+			if tt.doPluralizeTest {
+				Pluralize(tt.singular)
+				Pluralize(tt.plural)
+			}
+		}
+	}
+}

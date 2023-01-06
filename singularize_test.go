@@ -39,3 +39,14 @@ func Test_SingularizeWithSize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkSingularize(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		for _, tt := range singlePluralAssertions {
+			if tt.doSingularizeTest {
+				Singularize(tt.singular)
+				Singularize(tt.plural)
+			}
+		}
+	}
+}
