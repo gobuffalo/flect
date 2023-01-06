@@ -19,10 +19,7 @@ func Singularize(s string) string {
 //	SingularizeWithSize("user", 1) = user
 //	SingularizeWithSize("user", 2) = users
 func SingularizeWithSize(s string, i int) string {
-	if i == 1 || i == -1 {
-		return New(s).Singularize().String()
-	}
-	return New(s).Pluralize().String()
+	return PluralizeWithSize(s, i)
 }
 
 // Singularize returns a singular version of the string
@@ -45,9 +42,11 @@ func (i Ident) Singularize() Ident {
 		}
 		return i.ReplaceSuffix(s, p)
 	}
+
 	if _, ok := singleToPlural[ls]; ok {
 		return i
 	}
+
 	for _, r := range singularRules {
 		if strings.HasSuffix(ls, r.suffix) {
 			return i.ReplaceSuffix(s, r.fn(s))
@@ -57,5 +56,6 @@ func (i Ident) Singularize() Ident {
 	if strings.HasSuffix(s, "s") {
 		return i.ReplaceSuffix("s", "")
 	}
+
 	return i
 }
