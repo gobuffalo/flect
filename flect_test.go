@@ -322,6 +322,10 @@ var singlePluralAssertions = []dict{
 	{"waste", "wastes", true, true},
 	{"psi", "psis", true, true},
 	{"pepsi", "pepsis", true, true},
+
+	// Acronym edge cases
+	{"ssh", "SSHes", true, true},
+	{"eia", "EIAs", true, true},
 }
 
 func init() {
