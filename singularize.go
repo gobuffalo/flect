@@ -8,6 +8,7 @@ import (
 var singularMoot = &sync.RWMutex{}
 
 // Singularize returns a singular version of the string
+//
 //	users = user
 //	data = datum
 //	people = person
@@ -16,6 +17,7 @@ func Singularize(s string) string {
 }
 
 // SingularizeWithSize will singular a string taking a number number into account.
+//
 //	SingularizeWithSize("user", 1) = user
 //	SingularizeWithSize("user", 2) = users
 func SingularizeWithSize(s string, i int) string {
@@ -23,6 +25,7 @@ func SingularizeWithSize(s string, i int) string {
 }
 
 // Singularize returns a singular version of the string
+//
 //	users = user
 //	data = datum
 //	people = person
@@ -30,6 +33,25 @@ func (i Ident) Singularize() Ident {
 	s := i.LastPart()
 	if len(s) == 0 {
 		return i
+	}
+
+	// Special rules for Acronyms
+	// As per https://editorsmanual.com/articles/plurals-of-abbreviations/:
+	if baseAcronyms[strings.ToUpper(s)] {
+		// It's already singular - it's one of our acronyms
+		return i
+	} else if strings.HasSuffix(strings.ToLower(s), "es") {
+		// String ends with `es` - check to see if what's left is an acronym
+		a := s[:len(s)-2]
+		if baseAcronyms[strings.ToUpper(a)] {
+			return New(a)
+		}
+	} else if strings.HasSuffix(strings.ToLower(s), "s") {
+		// String ends with `s` - check to see if what's left is an acronym
+		a := s[:len(s)-1]
+		if baseAcronyms[strings.ToUpper(a)] {
+			return New(a)
+		}
 	}
 
 	singularMoot.RLock()

@@ -8,6 +8,7 @@ import (
 var pluralMoot = &sync.RWMutex{}
 
 // Pluralize returns a plural version of the string
+//
 //	user = users
 //	person = people
 //	datum = data
@@ -16,6 +17,7 @@ func Pluralize(s string) string {
 }
 
 // PluralizeWithSize will pluralize a string taking a number number into account.
+//
 //	PluralizeWithSize("user", 1) = user
 //	PluralizeWithSize("user", 2) = users
 func PluralizeWithSize(s string, i int) string {
@@ -26,6 +28,7 @@ func PluralizeWithSize(s string, i int) string {
 }
 
 // Pluralize returns a plural version of the string
+//
 //	user = users
 //	person = people
 //	datum = data
@@ -33,6 +36,17 @@ func (i Ident) Pluralize() Ident {
 	s := i.LastPart()
 	if len(s) == 0 {
 		return New("")
+	}
+
+	// Special rules for Acronyms
+	// As per https://editorsmanual.com/articles/plurals-of-abbreviations/:
+	// If it already ends in 's' then add 'es', otherwise add 's'
+	if baseAcronyms[strings.ToUpper(s)] {
+		if strings.HasSuffix(s, "S") || strings.HasSuffix(s, "s") {
+			return New(i.String() + "es")
+		}
+
+		return New(i.String() + "s")
 	}
 
 	pluralMoot.RLock()
