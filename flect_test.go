@@ -323,9 +323,15 @@ var singlePluralAssertions = []dict{
 	{"psi", "psis", true, true},
 	{"pepsi", "pepsis", true, true},
 
-	// Acronym edge cases
-	{"ssh", "SSHes", true, true},
-	{"eia", "EIAs", true, true},
+	// Acronym Pluralization
+	// Expected to conform to https://editorsmanual.com/articles/plurals-of-abbreviations/
+	{"api", "apis", true, true},
+	{"API", "APIs", true, true},
+	{"html", "htmls", true, true},
+	{"HTML", "HTMLs", true, true},
+	{"ssh", "sshs", true, true},
+	{"eia", "eias", true, true},
+	{"DNS", "DNSes", true, true},
 }
 
 func init() {
