@@ -35,8 +35,10 @@ func toParts(s string) []string {
 		return parts
 	}
 	if _, ok := baseAcronyms[strings.ToUpper(s)]; ok {
-		return []string{strings.ToUpper(s)}
+		// Found an acronym; preserve the users letter casing
+		return []string{s}
 	}
+
 	var prev rune
 	var x strings.Builder
 	x.Grow(len(s))
