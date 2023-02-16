@@ -107,15 +107,7 @@ func (i *Ident) LastPart() string {
 
 // ReplaceSuffix creates a new Ident with the original suffix replaced by new
 func (i Ident) ReplaceSuffix(orig, new string) Ident {
-	// We do a case-insensitive check for the suffix
-	// (strings.TrimSuffix is case-sensitive)
-	s := i.Original
-	l := len(s)
-	if strings.EqualFold(s[l-len(orig):], orig) {
-		s = s[:len(i.Original)-len(orig)]
-	}
-
-	return New(s + new)
+	return New(strings.TrimSuffix(i.Original, orig) + new)
 }
 
 // UnmarshalText unmarshalls byte array into the Ident
