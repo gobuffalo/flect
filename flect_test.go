@@ -322,6 +322,28 @@ var singlePluralAssertions = []dict{
 	{"waste", "wastes", true, true},
 	{"psi", "psis", true, true},
 	{"pepsi", "pepsis", true, true},
+
+	// Acronyms
+	{"widget_uuid", "widget_uuids", true, true},
+	{"WidgetUUID", "WidgetUUIDs", true, true},
+	{"widgetUUID", "widgetUUIDs", true, true},
+	{"widgetUuid", "widgetUuids", true, true},
+	{"widget_UUID", "widget_UUIDs", true, true},
+
+	{"ID", "IDs", true, true},
+	{"IDS", "IDSes", true, true},
+	// id to ids (ID), ids to idses (IDS) is not supported
+	{"api", "apis", true, true},
+	{"API", "APIs", true, true},
+	{"html", "htmls", true, true},
+	{"HTML", "HTMLs", true, true},
+	{"FYI", "FYIs", true, true},
+	{"LAN", "LANs", true, true},
+	{"ssh", "sshs", true, true}, // sh
+	{"SSH", "SSHs", true, true},
+	{"eia", "eias", true, true}, // ia
+	{"EIA", "EIAs", true, true},
+	{"DNS", "DNSes", true, true},
 }
 
 func init() {
