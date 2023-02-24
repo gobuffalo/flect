@@ -12,11 +12,13 @@ func Test_Titleize(t *testing.T) {
 		{"bob dylan", "Bob Dylan"},
 		{"Nice to see you!", "Nice To See You!"},
 		{"*hello*", "*hello*"},
+		{"hello *wonderful* world!", "Hello *wonderful* World!"}, // CHKME
 		{"i've read a book! have you?", "I've Read A Book! Have You?"},
 		{"This is `code` ok", "This Is `code` OK"},
 		{"foo_bar", "Foo Bar"},
 		{"admin/widget", "Admin Widget"},
 		{"widget", "Widget"},
+		{"óbito", "Óbito"},
 	}
 
 	for _, tt := range table {

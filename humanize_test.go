@@ -20,6 +20,7 @@ func Test_Humanize(t *testing.T) {
 		{"first_name", "First name"},
 		{"first_Name", "First Name"},
 		{"firstName", "First Name"},
+		{"óbito", "Óbito"},
 	}
 
 	for _, tt := range table {
