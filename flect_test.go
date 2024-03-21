@@ -227,6 +227,10 @@ var singlePluralAssertions = []dict{
 	{"media", "media", true, true}, // instead of mediae, popular case
 	{"multimedia", "multimedia", true, true},
 
+	// Words that end in -da change -da to -das
+	{"andromeda", "andromedas", true, true},
+	{"veranda", "verandas", true, true},
+
 	// Words that end in -ch, -o, -s, -sh, -x, -z
 	{"lunch", "lunches", true, true},
 	{"search", "searches", true, true},
