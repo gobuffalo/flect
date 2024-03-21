@@ -294,6 +294,9 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"nula", "bulae"},
 	{"vula", "bulae"},
 
+	// Words ending with -da change -da to -das
+	{"da", "das"},
+
 	// Words from Greek that end in -on change -on to -a (eg, polyhedron becomes polyhedra)
 	// https://en.wiktionary.org/wiki/Category:English_irregular_plurals_ending_in_"-a"
 	{"hedron", "hedra"},
