@@ -21,6 +21,11 @@ func Test_Humanize(t *testing.T) {
 		{"first_Name", "First Name"},
 		{"firstName", "First Name"},
 		{"óbito", "Óbito"},
+		{" ", " "},
+		{"\n", "\n"},
+		{"\r", "\r"},
+		{"\t", "\t"},
+		{" \n\r\t", " \n\r\t"},
 	}
 
 	for _, tt := range table {
