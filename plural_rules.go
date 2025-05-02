@@ -364,6 +364,7 @@ var singularToPluralSuffixList = []singularToPluralSuffix{
 	{"zz", "zzes"},
 	{"ano", "anos"},
 	{"lo", "los"},
+	{"po", "pos"}, // e.g. repos
 	{"to", "tos"},
 	{"oo", "oos"},
 	{"o", "oes"},
