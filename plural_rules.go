@@ -168,6 +168,7 @@ var dictionary = []word{
 	{singular: "buffalo", plural: "buffaloes", alternative: "buffalos"},
 	{singular: "potato", plural: "potatoes"},
 	{singular: "tomato", plural: "tomatoes"},
+	{singular: "lens", plural: "lenses"},
 
 	// uncountables
 	{singular: "equipment", uncountable: true},
