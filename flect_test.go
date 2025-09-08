@@ -265,6 +265,7 @@ var singlePluralAssertions = []dict{
 	{"horse", "horses", true, true},
 	{"lapse", "lapses", true, true},
 	{"collapse", "collapses", true, true},
+	{"lens", "lenses", true, true},
 	{"truss", "trusses", true, true},
 
 	{"portfolio", "portfolios", true, true}, // -o -os
