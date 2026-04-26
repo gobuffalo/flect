@@ -91,6 +91,7 @@ var baseAcronyms = map[string]bool{
 	"NRZ":   true,
 	"NRZI":  true,
 	"NVRAM": true,
+	"OIDC": true,
 	"OSI":   true,
 	"OSPF":  true,
 	"OUI":   true,
