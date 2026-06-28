@@ -2,8 +2,6 @@ package flect
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func Test_Capitalize(t *testing.T) {
@@ -20,7 +18,7 @@ func Test_Capitalize(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			r.Equal(tt.exp, Capitalize(tt.act))
 			r.Equal(tt.exp, Capitalize(tt.exp))
 		})

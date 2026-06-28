@@ -2,8 +2,6 @@ package flect
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func Test_Underscore(t *testing.T) {
@@ -21,7 +19,7 @@ func Test_Underscore(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			r.Equal(tt.exp, Underscore(tt.act))
 			r.Equal(tt.exp, Underscore(tt.exp))
 		})

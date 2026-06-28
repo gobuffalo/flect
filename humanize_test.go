@@ -2,8 +2,6 @@ package flect
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func Test_Humanize(t *testing.T) {
@@ -30,7 +28,7 @@ func Test_Humanize(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			r.Equal(tt.exp, Humanize(tt.act))
 			r.Equal(tt.exp, Humanize(tt.exp))
 		})

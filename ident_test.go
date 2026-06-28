@@ -2,8 +2,6 @@ package flect
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func Test_New(t *testing.T) {
@@ -46,7 +44,7 @@ func Test_New(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(tt.Original, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			i := New(tt.Original)
 			r.Equal(tt.Original, i.Original)
 			r.Equal(tt.Parts, i.Parts)
@@ -54,7 +52,7 @@ func Test_New(t *testing.T) {
 	}
 }
 func Test_MarshalText(t *testing.T) {
-	r := require.New(t)
+	r := newRequire(t)
 
 	n := New("mark")
 	b, err := n.MarshalText()

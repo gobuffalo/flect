@@ -2,8 +2,6 @@ package name
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func Test_Char(t *testing.T) {
@@ -17,7 +15,7 @@ func Test_Char(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			r.Equal(tt.exp, Char(tt.act))
 			r.Equal(tt.exp, Char(tt.exp))
 		})

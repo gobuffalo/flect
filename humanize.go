@@ -1,8 +1,6 @@
 package flect
 
-import (
-	"strings"
-)
+import "github.com/gobuffalo/flect/internal/core"
 
 // Humanize returns first letter of sentence capitalized.
 // Common acronyms are capitalized as well.
@@ -14,23 +12,5 @@ import (
 //	first_Name = First Name
 //	firstName = First Name
 func Humanize(s string) string {
-	return New(s).Humanize().String()
-}
-
-// Humanize First letter of sentence capitalized
-func (i Ident) Humanize() Ident {
-	if len(i.Original) == 0 {
-		return New("")
-	}
-
-	if strings.TrimSpace(i.Original) == "" {
-		return i
-	}
-
-	parts := xappend([]string{}, Titleize(i.Parts[0]))
-	if len(i.Parts) > 1 {
-		parts = xappend(parts, i.Parts[1:]...)
-	}
-
-	return New(strings.Join(parts, " "))
+	return core.Humanize(s)
 }

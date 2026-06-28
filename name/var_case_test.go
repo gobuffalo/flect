@@ -2,8 +2,6 @@ package name
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func Test_VarCaseSingle(t *testing.T) {
@@ -22,7 +20,7 @@ func Test_VarCaseSingle(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			r.Equal(tt.exp, VarCaseSingle(tt.act))
 			r.Equal(tt.exp, VarCaseSingle(tt.exp))
 		})
@@ -45,7 +43,7 @@ func Test_VarCasePlural(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			r.Equal(tt.exp, VarCasePlural(tt.act))
 			r.Equal(tt.exp, VarCasePlural(tt.exp))
 		})
@@ -69,7 +67,7 @@ func Test_VarCase(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			r.Equal(tt.exp, VarCase(tt.act))
 			r.Equal(tt.exp, VarCase(tt.exp))
 		})

@@ -2,15 +2,13 @@ package flect
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func Test_Pluralize(t *testing.T) {
 	for _, tt := range singlePluralAssertions {
 		if tt.doPluralizeTest {
 			t.Run(tt.singular, func(st *testing.T) {
-				r := require.New(st)
+				r := newRequire(st)
 				r.Equal(tt.plural, Pluralize(tt.singular), "pluralize %s", tt.singular)
 				r.Equal(tt.plural, Pluralize(tt.plural), "pluralize %s", tt.plural)
 			})
@@ -21,7 +19,7 @@ func Test_Pluralize(t *testing.T) {
 func Test_PluralizeWithSize(t *testing.T) {
 	for _, tt := range singlePluralAssertions {
 		t.Run(tt.singular, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			if tt.doSingularizeTest {
 				r.Equal(tt.singular, PluralizeWithSize(tt.singular, -1), "pluralize %d %s", -1, tt.singular)
 				r.Equal(tt.singular, PluralizeWithSize(tt.plural, -1), "pluralize %d %s", -1, tt.plural)

@@ -4,8 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 type tt struct {
@@ -14,7 +12,7 @@ type tt struct {
 }
 
 func Test_LoadInflections(t *testing.T) {
-	r := require.New(t)
+	r := newRequire(t)
 	m := map[string]string{
 		"baby": "bebe",
 		"xyz":  "zyx",
@@ -34,7 +32,7 @@ func Test_LoadInflections(t *testing.T) {
 }
 
 func Test_LoadInflectionsWrongSingular(t *testing.T) {
-	r := require.New(t)
+	r := newRequire(t)
 	m := map[string]string{
 		"a file": "files",
 	}
@@ -46,7 +44,7 @@ func Test_LoadInflectionsWrongSingular(t *testing.T) {
 }
 
 func Test_LoadInflectionsWrongPlural(t *testing.T) {
-	r := require.New(t)
+	r := newRequire(t)
 	m := map[string]string{
 		"beatle": "the beatles",
 	}
@@ -58,7 +56,7 @@ func Test_LoadInflectionsWrongPlural(t *testing.T) {
 }
 
 func Test_LoadAcronyms(t *testing.T) {
-	r := require.New(t)
+	r := newRequire(t)
 	m := []string{
 		"ACC",
 		"TLC",
@@ -348,20 +346,20 @@ var singlePluralAssertions = []dict{
 
 func init() {
 	for _, wd := range dictionary {
-		if wd.uncountable && wd.plural == "" {
-			wd.plural = wd.singular
+		if wd.Uncountable && wd.Plural == "" {
+			wd.Plural = wd.Singular
 		}
 
 		singlePluralAssertions = append(singlePluralAssertions, dict{
-			singular:          wd.singular,
-			plural:            wd.plural,
-			doSingularizeTest: !wd.unidirectional,
+			singular:          wd.Singular,
+			plural:            wd.Plural,
+			doSingularizeTest: !wd.Unidirectional,
 		})
 
-		if wd.alternative != "" {
+		if wd.Alternative != "" {
 			singlePluralAssertions = append(singlePluralAssertions, dict{
-				singular:        wd.singular,
-				plural:          wd.alternative,
+				singular:        wd.Singular,
+				plural:          wd.Alternative,
 				doPluralizeTest: false,
 			})
 		}
