@@ -3,15 +3,13 @@ package name
 import (
 	"fmt"
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 type car struct{}
 
 func Test_Interface(t *testing.T) {
 	table := []struct {
-		in  interface{}
+		in  any
 		out string
 		err bool
 	}{
@@ -24,7 +22,7 @@ func Test_Interface(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(fmt.Sprint(tt.in), func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			n, err := Interface(tt.in)
 			if tt.err {
 				r.Error(err)

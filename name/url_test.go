@@ -2,8 +2,6 @@ package name
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func Test_URL(t *testing.T) {
@@ -21,7 +19,7 @@ func Test_URL(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(tt.in, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			n := New(tt.in)
 			r.Equal(tt.out, n.URL().String(), "URL of %v", tt.in)
 		})

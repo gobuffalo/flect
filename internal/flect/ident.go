@@ -34,25 +34,14 @@ func toParts(s string) []string {
 	if len(s) == 0 {
 		return parts
 	}
-	if _, ok := baseAcronyms[strings.ToUpper(s)]; ok {
-		return []string{strings.ToUpper(s)}
+	up := strings.ToUpper(s)
+	if _, ok := BaseAcronyms[up]; ok {
+		return []string{up}
 	}
 	var prev rune
 	var x strings.Builder
 	x.Grow(len(s))
 	for _, c := range s {
-		// fmt.Println("### cs ->", cs)
-		// fmt.Println("### unicode.IsControl(c) ->", unicode.IsControl(c))
-		// fmt.Println("### unicode.IsDigit(c) ->", unicode.IsDigit(c))
-		// fmt.Println("### unicode.IsGraphic(c) ->", unicode.IsGraphic(c))
-		// fmt.Println("### unicode.IsLetter(c) ->", unicode.IsLetter(c))
-		// fmt.Println("### unicode.IsLower(c) ->", unicode.IsLower(c))
-		// fmt.Println("### unicode.IsMark(c) ->", unicode.IsMark(c))
-		// fmt.Println("### unicode.IsPrint(c) ->", unicode.IsPrint(c))
-		// fmt.Println("### unicode.IsPunct(c) ->", unicode.IsPunct(c))
-		// fmt.Println("### unicode.IsSpace(c) ->", unicode.IsSpace(c))
-		// fmt.Println("### unicode.IsTitle(c) ->", unicode.IsTitle(c))
-		// fmt.Println("### unicode.IsUpper(c) ->", unicode.IsUpper(c))
 		if !utf8.ValidRune(c) {
 			continue
 		}
@@ -72,7 +61,7 @@ func toParts(s string) []string {
 			prev = c
 			continue
 		}
-		if unicode.IsUpper(c) && baseAcronyms[strings.ToUpper(x.String())] {
+		if _, isAcronym := BaseAcronyms[x.String()]; unicode.IsUpper(c) && isAcronym {
 			parts = xappend(parts, x.String())
 			x.Reset()
 			x.WriteRune(c)
@@ -110,13 +99,13 @@ func (i Ident) ReplaceSuffix(orig, new string) Ident {
 	return New(strings.TrimSuffix(i.Original, orig) + new)
 }
 
-//UnmarshalText unmarshalls byte array into the Ident
+// UnmarshalText unmarshalls byte array into the Ident
 func (i *Ident) UnmarshalText(data []byte) error {
 	(*i) = New(string(data))
 	return nil
 }
 
-//MarshalText marshals Ident into byte array
+// MarshalText marshals Ident into byte array
 func (i Ident) MarshalText() ([]byte, error) {
 	return []byte(i.Original), nil
 }

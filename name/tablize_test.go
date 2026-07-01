@@ -2,8 +2,6 @@ package name
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func Test_Tableize(t *testing.T) {
@@ -29,7 +27,7 @@ func Test_Tableize(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			r.Equal(tt.exp, Tableize(tt.act))
 			r.Equal(tt.exp, Tableize(tt.exp))
 		})

@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -16,8 +15,8 @@ func init() {
 	loadCustomData("acronyms.json", "ACRONYMS_PATH", "could not read acronyms file", LoadAcronyms)
 }
 
-//CustomDataParser are functions that parse data like acronyms or
-//plurals in the shape of a io.Reader it receives.
+// CustomDataParser are functions that parse data like acronyms or
+// plurals in the shape of a io.Reader it receives.
 type CustomDataParser func(io.Reader) error
 
 func loadCustomData(defaultFile, env, readErrorMessage string, parser CustomDataParser) {
@@ -31,7 +30,7 @@ func loadCustomData(defaultFile, env, readErrorMessage string, parser CustomData
 		return
 	}
 
-	b, err := ioutil.ReadFile(path)
+	b, err := os.ReadFile(path)
 	if err != nil {
 		fmt.Printf("%s %s (%s)\n", readErrorMessage, path, err)
 		return
@@ -42,7 +41,7 @@ func loadCustomData(defaultFile, env, readErrorMessage string, parser CustomData
 	}
 }
 
-//LoadAcronyms loads rules from io.Reader param
+// LoadAcronyms loads acronyms from io.Reader param
 func LoadAcronyms(r io.Reader) error {
 	m := []string{}
 	err := json.NewDecoder(r).Decode(&m)
@@ -55,13 +54,13 @@ func LoadAcronyms(r io.Reader) error {
 	defer acronymsMoot.Unlock()
 
 	for _, acronym := range m {
-		baseAcronyms[acronym] = true
+		BaseAcronyms[acronym] = struct{}{}
 	}
 
 	return nil
 }
 
-//LoadInflections loads rules from io.Reader param
+// LoadInflections loads rules from io.Reader param
 func LoadInflections(r io.Reader) error {
 	m := map[string]string{}
 

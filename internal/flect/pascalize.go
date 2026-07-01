@@ -5,6 +5,7 @@ import (
 )
 
 // Pascalize returns a string with each segment capitalized
+//
 //	user = User
 //	bob dylan = BobDylan
 //	widget_id = WidgetID
@@ -13,6 +14,7 @@ func Pascalize(s string) string {
 }
 
 // Pascalize returns a string with each segment capitalized
+//
 //	user = User
 //	bob dylan = BobDylan
 //	widget_id = WidgetID
@@ -25,8 +27,8 @@ func (i Ident) Pascalize() Ident {
 		return i
 	}
 	capLen := 1
-	if _, ok := baseAcronyms[strings.ToUpper(i.Parts[0])]; ok {
+	if _, ok := BaseAcronyms[strings.ToUpper(i.Parts[0])]; ok {
 		capLen = len(i.Parts[0])
 	}
-	return New(string(strings.ToUpper(c.Original[0:capLen])) + c.Original[capLen:])
+	return Ident{Original: string(strings.ToUpper(c.Original[0:capLen])) + c.Original[capLen:]}
 }

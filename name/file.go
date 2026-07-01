@@ -3,10 +3,11 @@ package name
 import (
 	"strings"
 
-	"github.com/gobuffalo/flect"
+	core "github.com/gobuffalo/flect/internal/flect"
 )
 
 // File creates a suitable file name
+//
 //	admin/widget = admin/widget
 //	foo_bar = foo_bar
 //	U$ser = u_ser
@@ -15,6 +16,7 @@ func File(s string, exts ...string) string {
 }
 
 // File creates a suitable file name
+//
 //	admin/widget = admin/widget
 //	foo_bar = foo_bar
 //	U$ser = u_ser
@@ -22,7 +24,7 @@ func (i Ident) File(exts ...string) Ident {
 	var parts []string
 
 	for _, part := range strings.Split(i.Original, "/") {
-		parts = append(parts, flect.Underscore(part))
+		parts = append(parts, core.Underscore(part))
 	}
 	return New(strings.Join(parts, "/") + strings.Join(exts, ""))
 }

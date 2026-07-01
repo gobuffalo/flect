@@ -6,6 +6,7 @@ import (
 )
 
 // Camelize returns a camelize version of a string
+//
 //	bob dylan = bobDylan
 //	widget_id = widgetID
 //	WidgetID = widgetID
@@ -14,31 +15,32 @@ func Camelize(s string) string {
 }
 
 // Camelize returns a camelize version of a string
+//
 //	bob dylan = bobDylan
 //	widget_id = widgetID
 //	WidgetID = widgetID
 func (i Ident) Camelize() Ident {
 	var out []string
 	for i, part := range i.Parts {
-		var x string
+		var x strings.Builder
 		var capped bool
 		for _, c := range part {
 			if unicode.IsLetter(c) || unicode.IsDigit(c) {
 				if i == 0 {
-					x += string(unicode.ToLower(c))
+					x.WriteRune(unicode.ToLower(c))
 					continue
 				}
 				if !capped {
 					capped = true
-					x += string(unicode.ToUpper(c))
+					x.WriteRune(unicode.ToUpper(c))
 					continue
 				}
-				x += string(c)
+				x.WriteRune(c)
 			}
 		}
-		if x != "" {
-			out = append(out, x)
+		if x.Len() > 0 {
+			out = append(out, x.String())
 		}
 	}
-	return New(strings.Join(out, ""))
+	return Ident{Original: strings.Join(out, "")}
 }

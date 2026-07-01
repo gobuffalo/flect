@@ -2,8 +2,6 @@ package name
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 type tt struct {
@@ -38,7 +36,7 @@ func Test_Name(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			r.Equal(tt.exp, Proper(tt.act))
 			r.Equal(tt.exp, Proper(tt.exp))
 		})
@@ -63,7 +61,7 @@ func Test_Group(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			r.Equal(tt.exp, Group(tt.act))
 			r.Equal(tt.exp, Group(tt.exp))
 		})
@@ -71,7 +69,7 @@ func Test_Group(t *testing.T) {
 }
 
 func Test_MarshalText(t *testing.T) {
-	r := require.New(t)
+	r := newRequire(t)
 
 	n := New("mark")
 	b, err := n.MarshalText()

@@ -2,8 +2,6 @@ package name
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func Test_Ident_Key(t *testing.T) {
@@ -14,7 +12,7 @@ func Test_Ident_Key(t *testing.T) {
 
 	for in, out := range table {
 		t.Run(in, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			r.Equal(out, Key(in))
 		})
 	}

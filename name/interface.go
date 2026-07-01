@@ -5,7 +5,7 @@ import (
 	"reflect"
 )
 
-func Interface(x interface{}) (Ident, error) {
+func Interface(x any) (Ident, error) {
 	switch t := x.(type) {
 	case string:
 		return New(t), nil

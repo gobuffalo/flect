@@ -2,8 +2,6 @@ package name
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func Test_File(t *testing.T) {
@@ -20,7 +18,7 @@ func Test_File(t *testing.T) {
 
 	for _, tt := range table {
 		t.Run(tt.act, func(st *testing.T) {
-			r := require.New(st)
+			r := newRequire(st)
 			r.Equal(tt.exp, File(tt.act))
 			r.Equal(tt.exp, File(tt.exp))
 			r.Equal(tt.exp+".a.b", File(tt.act, ".a", ".b"))

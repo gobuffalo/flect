@@ -20,7 +20,7 @@ func Humanize(s string) string {
 // Humanize First letter of sentence capitalized
 func (i Ident) Humanize() Ident {
 	if len(i.Original) == 0 {
-		return New("")
+		return Ident{}
 	}
 
 	if strings.TrimSpace(i.Original) == "" {
@@ -32,5 +32,5 @@ func (i Ident) Humanize() Ident {
 		parts = xappend(parts, i.Parts[1:]...)
 	}
 
-	return New(strings.Join(parts, " "))
+	return Ident{Original: strings.Join(parts, " ")}
 }

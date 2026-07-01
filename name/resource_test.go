@@ -2,12 +2,10 @@ package name
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func Test_Name_Resource(t *testing.T) {
-	r := require.New(t)
+	r := newRequire(t)
 	table := []struct {
 		V string
 		E string
