@@ -54,7 +54,7 @@ func LoadAcronyms(r io.Reader) error {
 	defer acronymsMoot.Unlock()
 
 	for _, acronym := range m {
-		BaseAcronyms[acronym] = true
+		BaseAcronyms[acronym] = struct{}{}
 	}
 
 	return nil

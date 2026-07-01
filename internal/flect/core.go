@@ -16,7 +16,8 @@ func isSpace(c rune) bool {
 func xappend(a []string, ss ...string) []string {
 	for _, s := range ss {
 		s = strings.TrimFunc(s, isSpace)
-		if up := strings.ToUpper(s); BaseAcronyms[up] {
+		up := strings.ToUpper(s)
+		if _, ok := BaseAcronyms[up]; ok {
 			s = up
 		}
 		if s != "" {

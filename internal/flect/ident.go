@@ -34,7 +34,8 @@ func toParts(s string) []string {
 	if len(s) == 0 {
 		return parts
 	}
-	if up := strings.ToUpper(s); BaseAcronyms[up] {
+	up := strings.ToUpper(s)
+	if _, ok := BaseAcronyms[up]; ok {
 		return []string{up}
 	}
 	var prev rune
@@ -60,7 +61,7 @@ func toParts(s string) []string {
 			prev = c
 			continue
 		}
-		if unicode.IsUpper(c) && BaseAcronyms[x.String()] {
+		if _, isAcronym := BaseAcronyms[x.String()]; unicode.IsUpper(c) && isAcronym {
 			parts = xappend(parts, x.String())
 			x.Reset()
 			x.WriteRune(c)

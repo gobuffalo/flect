@@ -5,7 +5,7 @@ import (
 )
 
 func Test_Underscore(t *testing.T) {
-	baseAcronyms["TLC"] = true
+	baseAcronyms["TLC"] = struct{}{}
 
 	table := []tt{
 		{"", ""},

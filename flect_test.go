@@ -69,7 +69,8 @@ func Test_LoadAcronyms(t *testing.T) {
 	r.NoError(LoadAcronyms(bytes.NewReader(b)))
 
 	for _, acronym := range m {
-		r.True(baseAcronyms[acronym])
+		_, ok := baseAcronyms[acronym]
+		r.True(ok)
 	}
 }
 
