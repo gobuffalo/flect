@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	core "github.com/gobuffalo/flect/internal/core"
+	core "github.com/gobuffalo/flect/internal/flect"
 )
 
 var alphanum = regexp.MustCompile(`[^a-zA-Z0-9_]+`)

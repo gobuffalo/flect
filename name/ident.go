@@ -1,6 +1,6 @@
 package name
 
-import core "github.com/gobuffalo/flect/internal/core"
+import core "github.com/gobuffalo/flect/internal/flect"
 
 // Ident represents the string and it's parts
 type Ident struct {

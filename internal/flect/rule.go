@@ -1,4 +1,4 @@
-package core
+package flect
 
 type ruleFn func(string) string
 

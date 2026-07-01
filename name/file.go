@@ -3,7 +3,7 @@ package name
 import (
 	"strings"
 
-	core "github.com/gobuffalo/flect/internal/core"
+	core "github.com/gobuffalo/flect/internal/flect"
 )
 
 // File creates a suitable file name

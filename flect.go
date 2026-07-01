@@ -6,7 +6,7 @@ package flect
 import (
 	"io"
 
-	"github.com/gobuffalo/flect/internal/core"
+	core "github.com/gobuffalo/flect/internal/flect"
 )
 
 // Ident represents the string and it's parts

@@ -4,7 +4,7 @@ import (
 	"encoding"
 	"strings"
 
-	core "github.com/gobuffalo/flect/internal/core"
+	core "github.com/gobuffalo/flect/internal/flect"
 )
 
 // Proper pascalizes and singularizes the string
