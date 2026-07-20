@@ -66,11 +66,29 @@ func toParts(s string) []string {
 		}
 
 		if unicode.IsUpper(c) && !unicode.IsUpper(prev) {
-			parts = xappend(parts, x.String())
-			x.Reset()
-			x.WriteRune(c)
-			prev = c
-			continue
+			xStr := x.String()
+			// Only split here if x does not contain both space-like and
+			// non-space chars. When x has both (e.g. a space followed by a
+			// quotation mark), the uppercase letter is the first letter of a
+			// quoted word and should stay attached to its surrounding
+			// punctuation rather than being split into a separate part.
+			// For example, `a "B"` should produce ["a", `"B"`], not
+			// ["a", `"`, `B"`].
+			xHasSpace, xHasNonSpace := false, false
+			for _, r := range xStr {
+				if isSpace(r) {
+					xHasSpace = true
+				} else {
+					xHasNonSpace = true
+				}
+			}
+			if !(xHasSpace && xHasNonSpace) {
+				parts = xappend(parts, xStr)
+				x.Reset()
+				x.WriteRune(c)
+				prev = c
+				continue
+			}
 		}
 		if unicode.IsUpper(c) && baseAcronyms[strings.ToUpper(x.String())] {
 			parts = xappend(parts, x.String())
