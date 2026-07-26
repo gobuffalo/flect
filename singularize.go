@@ -56,7 +56,8 @@ func (i Ident) Singularize() Ident {
 	}
 
 	for _, r := range singularRules {
-		if strings.HasSuffix(s, r.suffix) {
+		// Acronym parts are normalized to uppercase, so only replace an exact suffix.
+		if strings.HasSuffix(s, r.suffix) && strings.HasSuffix(i.Original, s) {
 			return i.ReplaceSuffix(s, r.fn(s))
 		}
 	}

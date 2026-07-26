@@ -333,6 +333,7 @@ var singlePluralAssertions = []dict{
 	{"ID", "IDs", true, true},
 	{"IDS", "IDSes", true, true},
 	// id to ids (ID), ids to idses (IDS) is not supported
+	{"ids", "ids", true, true},
 	{"api", "apis", true, true},
 	{"API", "APIs", true, true},
 	{"html", "htmls", true, true},
@@ -343,6 +344,9 @@ var singlePluralAssertions = []dict{
 	{"SSH", "SSHs", true, true},
 	{"eia", "eias", true, true}, // ia
 	{"EIA", "EIAs", true, true},
+	{"https", "https", true, true},
+	{"HTTPS", "HTTPSes", true, true},
+	{"dns", "dns", true, true},
 	{"DNS", "DNSes", true, true},
 }
 
