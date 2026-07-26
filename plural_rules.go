@@ -193,6 +193,9 @@ var dictionary = []word{
 	// exceptions: instead of -um to -a
 	{singular: "pretorium", plural: "pretoriums"},
 	{singular: "agenda", plural: "agendas"}, // instead of plural of agendum
+	// exceptions: regular plurals ending in -ea
+	{singular: "area", plural: "areas"},
+	{singular: "idea", plural: "ideas"},
 	// exceptions: instead of -um to -a (chemical element names)
 
 	// Words from Latin that end in -a change -a to -ae

@@ -18,6 +18,10 @@ func Test_Pluralize(t *testing.T) {
 	}
 }
 
+func Test_PluralizePreservesAlternativeEAPlural(t *testing.T) {
+	require.Equal(t, "stadia", Pluralize("stadia"))
+}
+
 func Test_PluralizeWithSize(t *testing.T) {
 	for _, tt := range singlePluralAssertions {
 		t.Run(tt.singular, func(st *testing.T) {
