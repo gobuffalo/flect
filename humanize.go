@@ -27,6 +27,10 @@ func (i Ident) Humanize() Ident {
 		return i
 	}
 
+	if len(i.Parts) == 0 {
+		return i
+	}
+
 	parts := xappend([]string{}, Titleize(i.Parts[0]))
 	if len(i.Parts) > 1 {
 		parts = xappend(parts, i.Parts[1:]...)
